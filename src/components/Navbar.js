@@ -13,7 +13,7 @@ export default function Navbar(){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto h-100">
                         <li className="nav-item">
-                            <a className="nav-link active" href="#">
+                            <a className="nav-link active" href="/">
                                 <i className="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span className="sr-only">(current)</span>
@@ -21,7 +21,7 @@ export default function Navbar(){
                         </li>
                         <li className="nav-item dropdown">
 
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i className="far fa-file-alt"></i>
                                 <span>
@@ -29,9 +29,9 @@ export default function Navbar(){
                                 </span>
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Daily Report</a>
-                                <a className="dropdown-item" href="#">Weekly Report</a>
-                                <a className="dropdown-item" href="#">Yearly Report</a>
+                                <a className="dropdown-item" href="/">Daily Report</a>
+                                <a className="dropdown-item" href="/">Weekly Report</a>
+                                <a className="dropdown-item" href="/">Yearly Report</a>
                             </div>
                         </li>
                         <li className="nav-item">
@@ -48,7 +48,7 @@ export default function Navbar(){
                             </a>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-cog"></i>
                                 <span>
@@ -56,9 +56,9 @@ export default function Navbar(){
                                 </span>
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Profile</a>
-                                <a className="dropdown-item" href="#">Billing</a>
-                                <a className="dropdown-item" href="#">Customize</a>
+                                <a className="dropdown-item" href="/">Profile</a>
+                                <a className="dropdown-item" href="/">Billing</a>
+                                <a className="dropdown-item" href="/">Customize</a>
                             </div>
                         </li>
                     </ul>
