@@ -1,6 +1,7 @@
 import OrderList from "./OrdersList";
 import ContentCard from "./ContentCard";
 import NotificationsList from "./NotificationsList";
+import LoginForm from './LoginForm';
 
 export default function content() {
     return (
@@ -12,8 +13,7 @@ export default function content() {
             </div>
             <div className="row tm-content-row">
                 <ContentCard />
-                <ContentCard />
-                <ContentCard />
+                <LoginForm />
 
                 <NotificationsList />
                 <OrderList />
