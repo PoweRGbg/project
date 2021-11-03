@@ -324,6 +324,11 @@ thead {
   padding: 19px 18px;
   border-radius: 0;
   height: 50px;
+  background-color: #60738e;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 0 0.1rem rgb(180, 206, 233, 0.5);
+}
 }
 .form-group {
   margin-bottom: 15px;
