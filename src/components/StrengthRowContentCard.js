@@ -10,7 +10,6 @@ export default function HeroStrengthRow(props) {
         hero.skillPointsAvailable -=1;
         setHero(hero);
         handleChange(hero);
-        console.log('hero in tow is '+ JSON.stringify(hero));
     };
 
     function handleChange(hero) {

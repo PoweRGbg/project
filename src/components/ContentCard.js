@@ -32,10 +32,11 @@ export default function ContentCard(props) {
 
     function fightGoblinButtonClick() {
         if (Date.now() <= lastAction) {
-            console.log("Wait " + Math.floor((lastAction-Date.now())/1000)+" sec more");
+            console.log("Wait " + Math.floor((lastAction - Date.now()) / 1000) + " sec more");
             forceUpdate();
             return;
         }
+        hero.lastAttackTime = Date.now();
         goblin.health -= hero.strength;
         if (goblin.health <= 0) {
             console.log('Killed goblin! Getting ' + goblin.gold + ' gold and ' + goblin.xp + ' xp');
@@ -59,7 +60,6 @@ export default function ContentCard(props) {
                 setHero(hero);
                 forceUpdate();
                 setTimeout(() => {
-                    console.log('Taking timeout!');
                     hero.health += 1;
                     setHero(hero);
                     forceUpdate()
@@ -89,14 +89,32 @@ export default function ContentCard(props) {
             console.log('Not enough gold!');
     };
 
-    function heroLevelUp(){
-        if(hero.xp >= hero.nextLevelXp){
+    function healFromTimeButtonClick() {
+        if (Date.now() - hero.lastAttackTime > 10000) {
+            let timeInSeconds = (Date.now() - hero.lastAttackTime) / 1000;
+            let healed = Math.floor(timeInSeconds / 10);
+            console.log(`Time since last attack is ${timeInSeconds}sec. Healing ${healed}(${hero.health})`);
+            hero.health += healed;
+            if(hero.maxHealth < hero.health){
+                hero.health = hero.maxHealth;
+            }
+            props.hero.health = hero.health;
+            hero.lastAttackTime = Date.now();
+            setHero(hero);
+            forceUpdate();
+        } else {
+            console.log('Wait more than 10 sec!');
+        }
+    };
+
+    function heroLevelUp() {
+        if (hero.xp >= hero.nextLevelXp) {
             hero.level++;
             hero.nextLevelXp += hero.nextLevelXp * 1.5;
             hero.skillPointsAvailable = 2;
             setHero(hero);
         } else {
-            console.log(`You have ${hero.xp}. Next level in ${hero.nextLevelXp-hero.xp}`);
+            console.log(`You have ${hero.xp}. Next level in ${hero.nextLevelXp - hero.xp}`);
         }
         return;
     }
@@ -107,10 +125,10 @@ export default function ContentCard(props) {
         return () => setValue(value => value + 1); // update the state to force render
     }
 
-    function lowHealth(){
-        if(hero.health < hero.maxHealth/3) {  
+    function lowHealth() {
+        if (hero.health < hero.maxHealth / 3) {
             return 'blinkingRed';
-        } else if( hero.health < hero.maxHealth *0.8) {
+        } else if (hero.health < hero.maxHealth * 0.8) {
             return 'blinkingOrange';
         }
     }
@@ -140,6 +158,15 @@ export default function ContentCard(props) {
                             }}
                             >Heal for gold</button>}
                         </td>
+                        <td>{(hero.maxHealth - hero.health) > 0
+                            && ((Date.now() - hero.lastAttackTime) / 1000) > 10
+                            &&
+                            <button className="btn btn-primary btn-block text-uppercase" onClick={() => {
+                                //add random gold 
+                                healFromTimeButtonClick();
+                            }}
+                            >Heal from time</button>}
+                        </td>
                     </tr>
                     <tr>
                         <td>Gold</td>
@@ -149,7 +176,6 @@ export default function ContentCard(props) {
 
                         <td>{hero.health > 0 &&
                             <button className="btn btn-primary btn-block text-uppercase" onClick={() => {
-                                //add random gold 
                                 fightGoblinButtonClick();
 
                             }}>{(Date.now() >= lastAction)
@@ -164,10 +190,11 @@ export default function ContentCard(props) {
         </div>
     );
 
-    
+
     function timeLeft(lastAction, textAfterTimeout) {
         if (lastAction > Date.now()) {
-            let timeLeft = Math.floor((lastAction - Date.now()) / 1000);
+            let timeLeft = Math.floor((lastAction - Date.now()) / 1000); 
+        
             return (
                 <Timer initialSeconds={timeLeft} textAfterTimeout={textAfterTimeout} />
             );
