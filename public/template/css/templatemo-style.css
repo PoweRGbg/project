@@ -10,6 +10,11 @@ html {
   font-size: 16px;
   overflow-x: hidden;
 }
+
+hero {
+  text-align: right;
+  
+}
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   background-color: #4e657a;
@@ -712,3 +717,8 @@ input[type="checkbox"]:focus {
     max-height: 350px;
   }
 }
+
+hero-style {
+  color: white;
+  text-align: right;
+  }

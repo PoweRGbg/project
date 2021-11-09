@@ -712,3 +712,8 @@ input[type="checkbox"]:focus {
     max-height: 350px;
   }
 }
+
+Hero {
+  color: white;
+  text-align: right;
+  }
