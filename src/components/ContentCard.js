@@ -12,17 +12,18 @@ export default function ContentCard(props) {
     const forceUpdate = useForceUpdate();
 
     // Get state from strength
-    function handleStrengthChange(strengthValue) {
-        console.log('Strength is now ' + strengthValue);
-        hero.strength = strengthValue;
+    function handleStrengthChange(heroValues) {
+        console.log('Strength is now ' + heroValues.strength);
+        hero = heroValues;
         setHero(hero);
+        forceUpdate();
     }
 
 
     function initialGoblin() {
         let goblin = {
-            health: props.hero.maxHealth,
-            xp: props.hero.maxHealth,
+            health: 10,
+            xp: 10,
             level: props.hero.level,
             damage: 1,
             gold: Math.floor(Math.random() * props.hero.maxHealth)
@@ -30,22 +31,9 @@ export default function ContentCard(props) {
         return goblin;
     }
 
-
-
-    const addGoldButtonClickHandler = (howMuch) => {
-        if (howMuch) {
-            hero.gold += howMuch;
-        } else {
-            hero.gold += (Math.floor(Math.random() * 10) + 1);
-        }
-        setHero(hero);
-        props.hero.gold = hero.gold;
-        forceUpdate();
-    };
-
     function fightGoblinButtonClick() {
         if (Date.now() <= lastAction) {
-            console.log("Wait some more " + (Date.now() - lastAction));
+            console.log("Wait " + Math.floor((lastAction-Date.now())/1000)+" sec more");
             forceUpdate();
             return;
         }
@@ -54,10 +42,12 @@ export default function ContentCard(props) {
             console.log('Killed goblin! Getting ' + goblin.gold + ' gold and ' + goblin.xp + ' xp');
             setGoblin(initialGoblin());
             hero.gold += goblin.gold;
+            hero.xp += goblin.xp;
             setHero(hero);
+            // check for levelup
+            heroLevelUp();
             props.hero.gold = hero.gold;
             setLastAction(Date.now() + 10000);
-            console.log("Setting lastAction for +10 sec");
             forceUpdate();
         } else {
             console.log('Goblin (' + goblin.damage + ')left with  ' + goblin.health + ' life after ' + hero.strength + ' damage');
@@ -100,27 +90,22 @@ export default function ContentCard(props) {
             console.log('Not enough gold!');
     };
 
+    function heroLevelUp(){
+        if(hero.xp >= hero.nextLevelXp){
+            hero.level++;
+            hero.nextLevelXp += hero.nextLevelXp * 1.5;
+            hero.skillPointsAvailable = 2;
+            setHero(hero);
+        } else {
+            console.log(`You have ${hero.xp}. Next level in ${hero.nextLevelXp-hero.xp}`);
+        }
+        return;
+    }
+
     //create your forceUpdate hook
     function useForceUpdate() {
         const [value, setValue] = useState(0); // integer state
         return () => setValue(value => value + 1); // update the state to force render
-    }
-
-    function TakeTimeout(sec) {
-        const [seconds, setSeconds] = useState(sec);
-        useEffect(() => {
-            let myInterval = setInterval(() => {
-                if (seconds > 0) {
-                    setSeconds(seconds - 1);
-                }
-                if (seconds === 0) {
-                    clearInterval(myInterval)
-                }
-            }, 1000)
-            return () => {
-                clearInterval(myInterval);
-            };
-        });
     }
 
     return (
@@ -172,11 +157,7 @@ export default function ContentCard(props) {
         </div>
     );
 
-    function waitRow(seconds) {
-        return (
-            <tr><td>Please wait {seconds}sec more!</td></tr>
-        );
-    }
+    
     function timeLeft(lastAction, textAfterTimeout) {
         if (lastAction > Date.now()) {
             let timeLeft = Math.floor((lastAction - Date.now()) / 1000);

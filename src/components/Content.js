@@ -9,8 +9,10 @@ export default function content() {
         strength: 1,
         health: 10,
         maxHealth: 10,
+        level: 1,
         xp: 0,
-        nextLevelXp: 100,
+        nextLevelXp: 30,
+        skillPointsAvailable: 0,
         gold: 0,
 
     };

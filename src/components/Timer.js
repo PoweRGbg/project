@@ -28,7 +28,7 @@ export default function Timer(props) {
         <div>
         { minutes === 0 && seconds === 0
             ? props.textAfterTimeout
-            : <h1> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1> 
+            : <div> {minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</div> 
         }
         </div>
     )
