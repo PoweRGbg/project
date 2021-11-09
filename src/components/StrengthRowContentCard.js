@@ -8,19 +8,24 @@ export default function HeroStrengthRow(props) {
 
     const addStrengthButtonClickHandler = () => {
         setStrength(strength + 1);
-        handleChange(strength+1);
-        props.hero.strength = strength+1;
+        handleChange(strength + 1);
+        props.hero.strength = strength + 1;
     };
 
     function handleChange(strengthValue) {
-        console.log(`logged change inside - ` + strengthValue);
         props.onHeroChange(strengthValue);
     }
 
-    return <tr>
+    return <tr style={{
+        'background-color': '#54657d',
+        color: '#fff',
+        border: 0
+    }}>
         <td>Strength</td>
         <td onChange={handleChange}>{strength}</td>
-        <td>{(lastAction <= Date.now()) && <button onClick={() => {
+        <td >{(lastAction <= Date.now()) && <button  
+        className=" btn-primary text-uppercase" 
+        onClick={() => {
             if (lastAction < Date.now()) {
                 addStrengthButtonClickHandler();
                 handleChange(props.hero.strength);
@@ -30,7 +35,7 @@ export default function HeroStrengthRow(props) {
         }
 
         }>+</button>
-        }
+            }
         </td>
     </tr>;
 }
