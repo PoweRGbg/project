@@ -8,7 +8,6 @@ export default function ContentCard(props) {
     let [goblin, setGoblin] = useState(initialGoblin());
     // let [gold, setGold] = useState(0);
     let [lastAction, setLastAction] = useState(Date.now());
-
     const forceUpdate = useForceUpdate();
 
     // Get state from strength
@@ -108,6 +107,14 @@ export default function ContentCard(props) {
         return () => setValue(value => value + 1); // update the state to force render
     }
 
+    function lowHealth(){
+        if(hero.health < hero.maxHealth/3) {  
+            return 'blinkingRed';
+        } else if( hero.health < hero.maxHealth *0.8) {
+            return 'blinkingOrange';
+        }
+    }
+
     return (
         <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
             <div className="tm-bg-primary-dark tm-block">
@@ -123,7 +130,7 @@ export default function ContentCard(props) {
                     <StrengthRow hero={hero} onHeroChange={handleStrengthChange} />
                     <tr>
                         <td>Life</td>
-                        <td>{hero.health}</td>
+                        <td className={lowHealth()}>{hero.health}</td>
                         <td>{(hero.maxHealth - hero.health) > 0
                             && hero.gold > 0
                             &&
