@@ -1,6 +1,8 @@
 import '../css/herostyle.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StrengthRow from './StrengthRowContentCard';
+import Timer from './Timer';
+
 export default function ContentCard(props) {
     let [hero, setHero] = useState(props.hero);
     let [goblin, setGoblin] = useState(initialGoblin());
@@ -42,12 +44,11 @@ export default function ContentCard(props) {
     };
 
     function fightGoblinButtonClick() {
-        if(Date.now() <= lastAction){
+        if (Date.now() <= lastAction) {
             console.log("Wait some more " + (Date.now() - lastAction));
             forceUpdate();
             return;
         }
-        console.log(goblin);
         goblin.health -= hero.strength;
         if (goblin.health <= 0) {
             console.log('Killed goblin! Getting ' + goblin.gold + ' gold and ' + goblin.xp + ' xp');
@@ -56,11 +57,26 @@ export default function ContentCard(props) {
             setHero(hero);
             props.hero.gold = hero.gold;
             setLastAction(Date.now() + 10000);
+            console.log("Setting lastAction for +10 sec");
             forceUpdate();
         } else {
             console.log('Goblin (' + goblin.damage + ')left with  ' + goblin.health + ' life after ' + hero.strength + ' damage');
             setGoblin(goblin);
             hero.health -= goblin.damage;
+            //hero is dead
+            if (hero.health <= 0) {
+                console.log(`${hero.name} is dead! Wait 10 seconds!`);
+                setLastAction(Date.now() + 10000);
+                setHero(hero);
+                forceUpdate();
+                setTimeout(() => {
+                    console.log('Taking timeout!');
+                    hero.health += 1;
+                    setHero(hero);
+                    forceUpdate()
+                }, 10000);
+                return;
+            }
             setHero(hero);
             console.log('Goblin retaliates and leaves you with ' + props.hero.health);
             forceUpdate()
@@ -75,9 +91,13 @@ export default function ContentCard(props) {
             props.hero.health = props.hero.maxHealth;
             setHero(hero);
             forceUpdate();
-        } else {
+        } else if (hero.gold > 0) {
+            hero.health += hero.gold;
+            hero.gold = 0;
+            setHero(hero);
+            forceUpdate();
+        } else
             console.log('Not enough gold!');
-        }
     };
 
     //create your forceUpdate hook
@@ -86,26 +106,47 @@ export default function ContentCard(props) {
         return () => setValue(value => value + 1); // update the state to force render
     }
 
-
-
+    function TakeTimeout(sec) {
+        const [seconds, setSeconds] = useState(sec);
+        useEffect(() => {
+            let myInterval = setInterval(() => {
+                if (seconds > 0) {
+                    setSeconds(seconds - 1);
+                }
+                if (seconds === 0) {
+                    clearInterval(myInterval)
+                }
+            }, 1000)
+            return () => {
+                clearInterval(myInterval);
+            };
+        });
+    }
 
     return (
         <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
             <div className="tm-bg-primary-dark tm-block">
                 <h2 className="tm-block-title">{props.title}</h2>
                 <h3>{props.hero?.name}</h3>
-                <table className="Hero">
+                <table className="Hero" style={{
+                    'background-color': '#54657d',
+                    'color': '#fff',
+                    'text-align': 'right',
+                    'border': 0
+                }}>
 
                     <StrengthRow hero={hero} onHeroChange={handleStrengthChange} />
                     <tr>
                         <td>Life</td>
                         <td>{hero.health}</td>
-                        <td>{(hero.maxHealth - hero.health) < hero.gold && (hero.maxHealth - hero.health) > 0 &&
+                        <td>{(hero.maxHealth - hero.health) > 0
+                            && hero.gold > 0
+                            &&
                             <button className="btn btn-primary btn-block text-uppercase" onClick={() => {
                                 //add random gold 
                                 healButtonClick();
                             }}
-                            >Heal for {hero.maxHealth - hero.health} gold</button>}
+                            >Heal for gold</button>}
                         </td>
                     </tr>
                     <tr>
@@ -114,23 +155,41 @@ export default function ContentCard(props) {
                     </tr>
                     <tr>
 
-                        <td>
-                             <button className="btn btn-primary btn-block text-uppercase" onClick={() => {
+                        <td>{hero.health > 0 &&
+                            <button className="btn btn-primary btn-block text-uppercase" onClick={() => {
                                 //add random gold 
                                 fightGoblinButtonClick();
 
-                            }}>{(Date.now() >= lastAction)?`Fight goblin!(${goblin.health})`:"Wait!"}</button>
+                            }}>{(Date.now() >= lastAction)
+                                ? `Fight goblin!(${goblin.health})`
+                                : timeLeft(lastAction, `Fight goblin!(${goblin.health})`)
+                                }</button>
+                        }
                         </td>
-
                     </tr>
                 </table>
             </div>
         </div>
     );
+
+    function waitRow(seconds) {
+        return (
+            <tr><td>Please wait {seconds}sec more!</td></tr>
+        );
+    }
+    function timeLeft(lastAction, textAfterTimeout) {
+        if (lastAction > Date.now()) {
+            let timeLeft = Math.floor((lastAction - Date.now()) / 1000);
+            return (
+                <Timer initialSeconds={timeLeft} textAfterTimeout={textAfterTimeout} />
+            );
+        } else {
+            console.log(`here ${textAfterTimeout}`);
+            return textAfterTimeout;
+        }
+    }
+
+
+
 }
 
-function waitRow(seconds) {
-    return (
-        <tr><td>Please wait {seconds}sec more!</td></tr>
-    );
-}
