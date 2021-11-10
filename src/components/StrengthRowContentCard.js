@@ -16,7 +16,7 @@ export default function HeroStrengthRow(props) {
         props.onHeroChange(hero);
     }
     return <tr style={{
-        'background-color': '#54657d',
+        'backgroundColor': '#54657d',
         color: '#fff',
         border: 0
     }}>

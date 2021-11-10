@@ -20,7 +20,7 @@ export default function LoginForm() {
                                             className="form-control validate"
                                             id="username"
                                             required
-                                            style={{ 'background-color': '#54657d',
+                                            style={{ 'backgroundColor': '#54657d',
                                                 color: '#fff',
                                                 border: 0
                                             }}
@@ -33,7 +33,7 @@ export default function LoginForm() {
                                             type="password"
                                             className="form-control validate"
                                             id="password"
-                                            style={{ 'background-color': '#54657d',
+                                            style={{ 'backgroundColor': '#54657d',
                                                 color: '#fff',
                                                 border: 0
                                             }}

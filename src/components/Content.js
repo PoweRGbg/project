@@ -1,21 +1,21 @@
 import OrderList from "./OrdersList";
 import ContentCard from "./ContentCard";
 import NotificationsList from "./NotificationsList";
-import LoginForm from './LoginForm';
+// import LoginForm from './LoginForm';
 
 export default function content() {
-    let hero = {
-        name: "Conan",
-        strength: 1,
-        health: 10,
-        maxHealth: 10,
-        level: 1,
-        xp: 0,
-        nextLevelXp: 30,
-        skillPointsAvailable: 0,
-        gold: 0,
+    // let hero = {
+    //     name: "Conan",
+    //     strength: 1,
+    //     health: 10,
+    //     maxHealth: 10,
+    //     level: 1,
+    //     xp: 0,
+    //     nextLevelXp: 30,
+    //     skillPointsAvailable: 0,
+    //     gold: 0,
 
-    };
+    // };
     return (
         <div className="container">
             <div className="row">
@@ -24,8 +24,8 @@ export default function content() {
                 </div>
             </div>
             <div className="row tm-content-row">
-                <ContentCard title="Hero properties" hero={hero} />
-                <LoginForm />
+                <ContentCard title="Nightscout monitor" />
+                {/* <LoginForm /> */}
 
                 <NotificationsList />
                 <OrderList />
