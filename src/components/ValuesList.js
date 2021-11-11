@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import SensorValue from './SensorValue.js'
-const urls = ['https://roumen.nightscout.bg'];
-const entriesUrl = '/api/v1/entries';
+import {urls, entriesUrl} from '../config/configuration.js'
+
 export default function ValueList(props) {
     let [glucoseValues, setGlucoseValues] = useState([]);
 

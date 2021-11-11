@@ -8,7 +8,7 @@ export default function SensorValue({
 
     return (
         <li onClick={() => onClick(sgv.id)} >
-          {sgv.dateString} - {sgv.sgv}
+          {sgv.date} - {sgv.sgv}
         </li>
     );
 }
