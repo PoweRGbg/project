@@ -1,5 +1,9 @@
-import { urls, entriesUrl, useMmol, toMmol } from '../config/configuration.js'
+import { urls, entriesUrl, useMmol, toMmol, secret } from '../config/configuration.js'
+var crypto = require('crypto');
 
+let shasum = crypto.createHash('sha1');
+shasum.update(secret);
+let hashedApiSecret = shasum.digest('hex');
 export const getSgv = async () => {
     let url = urls[0] + entriesUrl;
     fetch(url, {
@@ -25,7 +29,7 @@ export const getSgv = async () => {
 
 export const createSgv = async (sgv) => {
     let url = urls[0] + entriesUrl;
-
+    console.log(hashedApiSecret);
     sgv = [
         {
             type: "sgv",
@@ -36,7 +40,7 @@ export const createSgv = async (sgv) => {
             noise: 0,
             filtered: 0,
             unfiltered: 0,
-            rssi: 0
+            rssi: 0,
         }
     ]
     try {
@@ -44,9 +48,10 @@ export const createSgv = async (sgv) => {
             method: 'POST',
             mode: 'no-cors',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                "api-secret": hashedApiSecret
             },
-            body: JSON.stringify(sgv)
+            body: [{secret: hashedApiSecret},JSON.stringify(sgv)]
         });
         let result = await response.json();
         console.log(`Server returned ${result}`);

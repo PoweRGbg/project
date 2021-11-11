@@ -1,6 +1,6 @@
 import '../css/herostyle.css';
-import MealsTable from './MealsTable';
-export default function ContentCard(props) {
+import  AddMealForm  from './AddMealForm'
+export default function AddMealCard(props) {
 
     return (
         <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
@@ -11,7 +11,7 @@ export default function ContentCard(props) {
                     <table className="media tm-notification-item">
                         <tbody>
                             <tr>
-                                <td><MealsTable /></td>
+                                <td><AddMealForm /></td>
 
                             </tr>
                         </tbody>

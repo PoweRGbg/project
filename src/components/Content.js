@@ -24,7 +24,8 @@ export default function content() {
                 </div>
             </div>
             <div className="row tm-content-row">
-                <ContentCard title="Nightscout monitor" />
+                <addMealCard title="Add meal" />
+                <ContentCard title="Latest meals" />
                 {/* <LoginForm /> */}
 
                 <NotificationsList />
