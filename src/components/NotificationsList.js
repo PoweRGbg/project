@@ -1,18 +1,25 @@
 import NotificationsListItem from "./NotificationsListItem"
 import { useState, useEffect } from 'react';
 import { getNotifications } from '../services/notificationService';
+import { getMeals } from '../services/mealService';
+
 
 export default function NotificationsList() {
   let [notifications, setNotifications] = useState([]);
+  let [meals, setMeals] = useState([]);
+
 
   useEffect(() => {
     getNotifications().then(result => {
       if (result) {
-        setNotifications(result.sort((a,b)=> b.date - a.date)); // show newest first
+        setNotifications(result.sort((a, b) => b.date - a.date)); // show newest first
       }
-    }
-    )
-  }, []);
+    })
+    getMeals().then(result => {
+      if (result)
+        setMeals(result)
+    })
+  }, [meals]);
 
   return (
     <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">

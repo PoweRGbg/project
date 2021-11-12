@@ -1,6 +1,7 @@
 import uniqid from 'uniqid';
 import { url } from '../config/configuration.js'
 import { addNotification } from './notificationService.js'
+
 export const addMeal = async (meal) => {
     try {
         meal.id = uniqid();
@@ -12,7 +13,6 @@ export const addMeal = async (meal) => {
             body: JSON.stringify(meal)
         });
         let result = await response.json();
-        console.log(`Server returned ${JSON.stringify(result)}`);
         createNotification(meal);
         return result;
     } catch (error) {

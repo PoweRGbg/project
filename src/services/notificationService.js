@@ -21,7 +21,6 @@ export const addNotification = async (notification) => {
             body: JSON.stringify(notification)
         });
         let result = await response.json();
-        console.log(`Server returned  notification ${JSON.stringify(result)}`);
         return result;
     } catch (error) {
         console.error(error)
