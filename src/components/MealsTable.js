@@ -16,7 +16,7 @@ export default function MealsTable(props) {
     return (
         <div className="col-12 tm-block-col">
             <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-              <h2 className="tm-block-title">Orders List</h2>
+              <h2 className="tm-block-title">Meals List</h2>
               <table className="table">
                 <thead>
                   <tr>

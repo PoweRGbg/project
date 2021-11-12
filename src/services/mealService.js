@@ -1,23 +1,10 @@
 import uniqid from 'uniqid';
 import { url } from '../config/configuration.js'
-
+import {addNotification} from './notificationService.js'
 export const addMeal = async (meal) => {
-    // meal = [
-    //     {
-    //         type: "meal",
-    //         dateString: Date.now().toString(),
-    //         date: Date.now(),
-    //         meal: 110,
-    //         direction: "Flat",
-    //         noise: 0,
-    //         filtered: 0,
-    //         unfiltered: 0,
-    //         rssi: 0,
-    //     }
-    // ]
     try {
         meal.id = uniqid();
-        let response = await fetch(url, {
+        let response = await fetch(url + "/meals", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -26,6 +13,7 @@ export const addMeal = async (meal) => {
         });
         let result = await response.json();
         console.log(`Server returned ${JSON.stringify(result)}`);
+        createNotification(meal);
         return result;
     } catch (error) {
         console.error(error)
@@ -33,10 +21,22 @@ export const addMeal = async (meal) => {
 
 }
 
-export async function getMeals () {
-    let meals = await fetch(url, {
+export async function getMeals() {
+    let meals = await fetch(url + "/meals", {
         method: 'GET'
     });
     let result = await meals.json();
     return Object.values(result);
+}
+
+export function createNotification(meal) {
+    let notification =
+    {
+        who: "User name",
+        dateString: Date.now().toString(),
+        date: Date.now(),
+        text: `Added ${meal.name}`,
+        recipe: meal.id,
+    }
+    addNotification(notification);  
 }

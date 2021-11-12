@@ -8,7 +8,8 @@ export default function AddMealForm(props) {
     }, []);
 
     function recipeIsReady(){
-        if(newRecipe.name && newRecipe.serving && newRecipe.carbs){
+        if(newRecipe.hasOwnProperty('name') && newRecipe.hasOwnProperty('serving') && newRecipe.hasOwnProperty('carbs'))
+        if(newRecipe.name !== "" && newRecipe.serving !== "" && newRecipe.carbs !== ""){
             return true;
         } 
         return false;
@@ -18,10 +19,10 @@ export default function AddMealForm(props) {
  
     function onBlur(e) {
         newRecipe[e.target.name] = e.target.value;
-        console.log("Name of input:"+e.target.name);
 
-        if (recipeIsReady) {
+        if (recipeIsReady()) {
             addMeal(newRecipe);
+            newRecipe = {};
             e.target.value = "";
         }
     }
