@@ -30,9 +30,14 @@ export const addNotification = async (notification) => {
 }
 
 export async function getNotifications () {
-    let notifications = await fetch(url + "/notifications", {
-        method: 'GET'
-    });
-    let result = await notifications.json();
-    return Object.values(result);
+    try {
+        let notifications = await fetch(url + "/notifications", {
+            method: 'GET'
+        });
+        let result = await notifications.json();
+        return Object.values(result);
+    } catch (error) {
+        console.error("Failed fetching notifications from database!");
+    }
+
 }

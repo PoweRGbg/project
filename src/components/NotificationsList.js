@@ -7,7 +7,9 @@ export default function NotificationsList() {
 
   useEffect(() => {
     getNotifications().then(result => {
-      setNotifications(result);
+      if (result) {
+        setNotifications(result.sort((a,b)=> b.date - a.date)); // show newest first
+      }
     }
     )
   }, []);
@@ -17,12 +19,10 @@ export default function NotificationsList() {
       <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
         <h2 className="tm-block-title">Notification List</h2>
         <div className="tm-notification-items">
-          {notifications.map(notification =>
+          {notifications.length > 0 && notifications.map(notification =>
             <NotificationsListItem
               notification={notification}
             />)}
-
-        
 
         </div>
       </div>

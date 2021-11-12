@@ -1,6 +1,6 @@
 import uniqid from 'uniqid';
 import { url } from '../config/configuration.js'
-import {addNotification} from './notificationService.js'
+import { addNotification } from './notificationService.js'
 export const addMeal = async (meal) => {
     try {
         meal.id = uniqid();
@@ -22,11 +22,16 @@ export const addMeal = async (meal) => {
 }
 
 export async function getMeals() {
-    let meals = await fetch(url + "/meals", {
-        method: 'GET'
-    });
-    let result = await meals.json();
-    return Object.values(result);
+    try {
+        let meals = await fetch(url + "/meals", {
+            method: 'GET'
+        });
+        let result = await meals.json();
+        return Object.values(result);
+
+    } catch (error) {
+        console.error('Failed fetching meals!');
+    }
 }
 
 export function createNotification(meal) {
@@ -38,5 +43,5 @@ export function createNotification(meal) {
         text: `Added ${meal.name}`,
         recipe: meal.id,
     }
-    addNotification(notification);  
+    addNotification(notification);
 }
