@@ -1,11 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {addMeal, getMeals} from '../services/mealService';
 export default function AddMealForm(props) {
     let newRecipe = {};
+    let [meals, setMeals] = useState([]);
 
     useEffect(() => {
-        getMeals();
-    }, []);
+        getMeals().then(result => {
+            if (result)
+                setMeals(result)
+        })
+    }, [meals]);
+
+    function nameExists(name) {
+        if(meals.filter(meal => meal.name == name).length > 0) {
+            return true;
+        } else {
+            return false
+        }
+        
+    }
 
     function recipeIsReady(){
         if(newRecipe.hasOwnProperty('name') && newRecipe.hasOwnProperty('serving') && newRecipe.hasOwnProperty('carbs'))
@@ -19,8 +32,7 @@ export default function AddMealForm(props) {
  
     function onBlur(e) {
         newRecipe[e.target.name] = e.target.value;
-
-        if (recipeIsReady()) {
+        if (recipeIsReady() && !nameExists(newRecipe.name)) {
             addMeal(newRecipe);
             newRecipe = {};
             e.target.value = "";

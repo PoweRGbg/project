@@ -16,7 +16,6 @@ export default function NotificationsListItem({ notification }) {
       <div className="media-body">
         <p className="mb-2"><b>{notification?.who}</b> {notification.text} <a href="/"
           className="tm-notification-link">{notification.recipeName}</a></p>
-        {/* <span className="tm-small tm-text-color-secondary">{new Date(notification.date).toTimeString()} {new Date(notification.date).toLocaleDateString()}.</span> */}
         <span className="tm-small tm-text-color-secondary">{daysAgo? daysAgo+" d ": ""}{hoursAgo? hoursAgo+" h ": ""}{minAgo} m ago.</span>
       </div>
     </div>
