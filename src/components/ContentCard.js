@@ -1,5 +1,5 @@
 import '../css/herostyle.css';
-import MealsTable from './MealsTable';
+import AddMealForm from './AddMealForm';
 export default function ContentCard(props) {
 
     return (
@@ -8,10 +8,10 @@ export default function ContentCard(props) {
                 <h2 className="tm-block-title">{props.title}</h2>
                 <div className="col-12 text-center">
                     <h2 className="tm-block-title mb-4">Add meal</h2>
-                    <table className="media tm-notification-item">
+                    <table>
                         <tbody>
                             <tr>
-                                <td><MealsTable /></td>
+                                <td><AddMealForm /></td>
 
                             </tr>
                         </tbody>

@@ -5,11 +5,11 @@ import MealsTableRow from './MealsTableRow';
 export default function MealsTable(props) {
     let [meals, setMeals] = useState([]);
 
-    useEffect(async () => {
-        meals = await getMeals();
-        console.log(`from insid ${meals}`);
-        setMeals(meals);
-    }, []);
+    useEffect(() => {
+        getMeals().then(result=>
+            setMeals(result)
+        )
+    }, [meals]);
 
 
 
@@ -27,7 +27,7 @@ export default function MealsTable(props) {
                   </tr>
                 </thead>
                 <tbody>
-                    {meals.map(meal => <MealsTableRow meal={meal}/>)}
+                    {meals.map(meal => <MealsTableRow meal={meal} key={meal._id}/>)}
                   
                 </tbody>
               </table>

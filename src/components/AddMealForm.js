@@ -22,13 +22,13 @@ export default function AddMealForm(props) {
 
         if (recipeIsReady) {
             addMeal(newRecipe);
+            e.target.value = "";
         }
     }
     
     return (
-        <div>
             <center>
-                <label for="name">Name of meal</label>
+                <label>Name of meal</label>
                 <input
                     name="name"
                     type="text"
@@ -43,7 +43,7 @@ export default function AddMealForm(props) {
                     onBlur={(e) => {onBlur(e)}}
 
                 />
-                <label for="serving">Serving in g.</label>
+                <label>Serving in g.</label>
                 <input
                     name="serving"
                     type="number"
@@ -58,7 +58,7 @@ export default function AddMealForm(props) {
                     onBlur={(e) => {onBlur(e)}}
 
                 />
-                <label for="carbs">Carbs in g.</label>
+                <label>Carbs in g.</label>
                 <input
                     name="carbs"
                     type="number"
@@ -75,6 +75,5 @@ export default function AddMealForm(props) {
 
                 />
             </center>
-        </div>
     );
 }

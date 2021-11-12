@@ -1,6 +1,6 @@
-import OrderList from "./OrdersList";
-import ContentCard from "./ContentCard";
 import NotificationsList from "./NotificationsList";
+import MealsTable from "./MealsTable";
+import AddMealCard from "./AddMealCard";
 // import LoginForm from './LoginForm';
 
 export default function content() {
@@ -24,12 +24,11 @@ export default function content() {
                 </div>
             </div>
             <div className="row tm-content-row">
-                <addMealCard title="Add meal" />
-                <ContentCard title="Latest meals" />
+                <AddMealCard title="Add meal" />
                 {/* <LoginForm /> */}
 
                 <NotificationsList />
-                <OrderList />
+                <MealsTable title="Latest meals" />
             </div>
         </div>
     );
