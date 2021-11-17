@@ -47,10 +47,6 @@ export default function AddMealForm({history}) {
                 addMeal(newRecipe);
                 console.log(`added ${newRecipe.name} to database`);
                 meals.push(newRecipe);
-                // clear form
-                // Array.from(document.querySelectorAll("input")).forEach(
-                //     input => (input.value = "")
-                // );
                 historyHook.push('/allmeals');
             }
         }

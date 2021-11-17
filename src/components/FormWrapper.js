@@ -1,11 +1,7 @@
 import AddMealForm from "./AddMealForm";
-import { useEffect } from "react";
 
-export default function FormWrapper({history}) {
-    useEffect(() => {
-                console.log(JSON.stringify(history));
-        
-    }, [history]);
+export default function FormWrapper() {
+
     return (
 
         <div className="col-12 tm-block-col">

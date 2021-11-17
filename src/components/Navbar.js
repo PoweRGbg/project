@@ -1,10 +1,27 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
+import {useState} from 'react';
 
 export default function Navbar() {
+    let historyHook = useHistory();
+    let [activeButton, setActive] = useState("");
+    let activeNavButton = historyHook.location.pathname.split("/")[1];
+    console.log(`Active nav is ${activeNavButton}`);
+    
+    const clickHandler = function(e){
+        let locationSplitted = e.target.href.split("/");
+        activeNavButton = locationSplitted[locationSplitted.length - 1];
+        if(activeNavButton === undefined) {
+            activeNavButton = ""
+        }
+        console.log(locationSplitted);
+        console.log(activeNavButton);
+        setActive(activeNavButton);
+    }
+
     return (
         <nav className="navbar navbar-expand-xl">
             <div className="container h-100">
-                <Link className="navbar-brand" to="index.html">
+                <Link className="navbar-brand" to="/" onClick={clickHandler}>
                     <h1 className="tm-site-title mb-0">T1D Carb Counter</h1>
                 </Link>
                 <button className="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -15,7 +32,7 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto h-100">
                         <li className="nav-item">
-                            <Link className="nav-link active" to="/">
+                            <Link className={activeButton == ""? "nav-link active":"nav-link"} to="/" onClick={clickHandler}>
                                 <i className="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span className="sr-only">(current)</span>
@@ -23,7 +40,12 @@ export default function Navbar() {
                         </li>
                         <li className="nav-item dropdown">
 
-                            <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <Link className={
+                                activeButton === "allmeals"
+                                || activeButton === "reports"
+                                || activeButton === "addMeal"
+                            ? "nav-link dropdown-toggle active"
+                            :"nav-link dropdown-toggle"} to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i className="far fa-file-alt"></i>
                                 <span>
@@ -31,9 +53,9 @@ export default function Navbar() {
                                 </span>
                             </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to="/addMeal">Add new meal</Link>
-                                <Link className="dropdown-item" to="/reports">Latest actions</Link>
-                                <Link className="dropdown-item" to="/allmeals">All meals</Link>
+                                <Link className="dropdown-item" to="/addMeal" onClick={clickHandler}>Add new meal</Link>
+                                <Link className="dropdown-item" to="/reports" onClick={clickHandler}>Latest actions</Link>
+                                <Link className="dropdown-item" to="/allmeals" onClick={clickHandler}>All meals</Link>
                             </div>
                         </li>
                         <li className="nav-item">
