@@ -15,11 +15,13 @@ export default function NotificationsList() {
         setNotifications(result.sort((a, b) => b.date - a.date)); // show newest first
       }
     })
-    getMeals().then(result => {
-      if (result)
-        setMeals(result)
-    })
-  }, [meals]);
+    /// Warning!!!! This causes infinite loop
+    // getMeals().then(result => {
+    //   if (result)
+    //     console.log(result);
+    //     setMeals(result)
+    // })
+  }, []);
 
   return (
     <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">

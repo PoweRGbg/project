@@ -10,7 +10,7 @@ export default function MealsTable(props) {
             if (result)
                 setMeals(result)
         })
-    }, [meals]);
+    }, []);
 
 
 
