@@ -1,10 +1,12 @@
-export default function Navbar(){
+import { Link } from 'react-router-dom';
+
+export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-xl">
             <div className="container h-100">
-                <a className="navbar-brand" href="index.html">
+                <Link className="navbar-brand" to="index.html">
                     <h1 className="tm-site-title mb-0">Product Admin</h1>
-                </a>
+                </Link>
                 <button className="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i className="fas fa-bars tm-nav-icon"></i>
@@ -13,60 +15,60 @@ export default function Navbar(){
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto h-100">
                         <li className="nav-item">
-                            <a className="nav-link active" href="/">
+                            <Link className="nav-link active" to="/">
                                 <i className="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span className="sr-only">(current)</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
 
-                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i className="far fa-file-alt"></i>
                                 <span>
-                                    Reports <i className="fas fa-angle-down"></i>
+                                    Meals <i className="fas fa-angle-down"></i>
                                 </span>
-                            </a>
+                            </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="/">Daily Report</a>
-                                <a className="dropdown-item" href="/">Weekly Report</a>
-                                <a className="dropdown-item" href="/">Yearly Report</a>
+                                <Link className="dropdown-item" to="/addMeal">Add new meal</Link>
+                                <Link className="dropdown-item" to="/reports">Latest actions</Link>
+                                <Link className="dropdown-item" to="/mealsList">All meals</Link>
                             </div>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="products.html">
+                            <Link className="nav-link" to="products.html">
                                 <i className="fas fa-shopping-cart"></i>
                                 Products
-                            </a>
+                            </Link>
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="accounts.html">
+                            <Link className="nav-link" to="accounts.html">
                                 <i className="far fa-user"></i>
                                 Accounts
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-cog"></i>
                                 <span>
                                     Settings <i className="fas fa-angle-down"></i>
                                 </span>
-                            </a>
+                            </Link>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="/">Profile</a>
-                                <a className="dropdown-item" href="/">Billing</a>
-                                <a className="dropdown-item" href="/">Customize</a>
+                                <Link className="dropdown-item" to="/">Profile</Link>
+                                <Link className="dropdown-item" to="/">Billing</Link>
+                                <Link className="dropdown-item" to="/">Customize</Link>
                             </div>
                         </li>
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link d-block" href="login.html">
+                            <Link className="nav-link d-block" to="login.html">
                                 Admin, <b>Logout</b>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>

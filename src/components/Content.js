@@ -1,4 +1,3 @@
-import NotificationsList from "./NotificationsList";
 import MealsTable from "./MealsTable";
 import AddMealCard from "./AddMealCard";
 // import LoginForm from './LoginForm';
@@ -27,7 +26,6 @@ export default function content() {
                 <AddMealCard title="Add meal" />
                 {/* <LoginForm /> */}
 
-                <NotificationsList />
                 <MealsTable title="Latest meals" />
             </div>
         </div>
