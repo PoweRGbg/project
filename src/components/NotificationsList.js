@@ -1,12 +1,12 @@
 import NotificationsListItem from "./NotificationsListItem"
 import { useState, useEffect } from 'react';
 import { getNotifications } from '../services/notificationService';
-import { getMeals } from '../services/mealService';
+// import { getMeals } from '../services/mealService';
 
 
 export default function NotificationsList() {
   let [notifications, setNotifications] = useState([]);
-  let [meals, setMeals] = useState([]);
+  // let [meals, setMeals] = useState([]);
 
 
   useEffect(() => {

@@ -100,6 +100,11 @@ button:focus {
   color: #fff;
   margin-bottom: 30px;
 }
+.tm-block-list {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
 .nav-link {
   color: #fff;
   height: 100%;
@@ -333,7 +338,6 @@ thead {
   color: #fff;
   border-color: transparent;
   box-shadow: 0 0 0 0.1rem rgb(180, 206, 233, 0.5);
-}
 }
 .form-group {
   margin-bottom: 15px;

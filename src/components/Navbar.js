@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav className="navbar navbar-expand-xl">
             <div className="container h-100">
                 <Link className="navbar-brand" to="index.html">
-                    <h1 className="tm-site-title mb-0">Product Admin</h1>
+                    <h1 className="tm-site-title mb-0">T1D Carb Counter</h1>
                 </Link>
                 <button className="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ export default function Navbar() {
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <Link className="dropdown-item" to="/addMeal">Add new meal</Link>
                                 <Link className="dropdown-item" to="/reports">Latest actions</Link>
-                                <Link className="dropdown-item" to="/mealsList">All meals</Link>
+                                <Link className="dropdown-item" to="/allmeals">All meals</Link>
                             </div>
                         </li>
                         <li className="nav-item">

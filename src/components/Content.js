@@ -1,5 +1,4 @@
 import MealsTable from "./MealsTable";
-import AddMealCard from "./AddMealCard";
 // import LoginForm from './LoginForm';
 
 export default function content() {
@@ -23,7 +22,6 @@ export default function content() {
                 </div>
             </div>
             <div className="row tm-content-row">
-                <AddMealCard title="Add meal" />
                 {/* <LoginForm /> */}
 
                 <MealsTable title="Latest meals" />
