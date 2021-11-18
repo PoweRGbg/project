@@ -5,16 +5,16 @@ export default function Navbar() {
     let historyHook = useHistory();
     let [activeButton, setActive] = useState("");
     let activeNavButton = historyHook.location.pathname.split("/")[1];
-    console.log(`Active nav is ${activeNavButton}`);
     
     const clickHandler = function(e){
+        if(!e.target.href){
+            e.target.href = "";
+        }
         let locationSplitted = e.target.href.split("/");
         activeNavButton = locationSplitted[locationSplitted.length - 1];
         if(activeNavButton === undefined) {
             activeNavButton = ""
         }
-        console.log(locationSplitted);
-        console.log(activeNavButton);
         setActive(activeNavButton);
     }
 
