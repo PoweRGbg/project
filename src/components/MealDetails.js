@@ -59,7 +59,8 @@ return (
                 </div>
             </div>
         </div >
-        <CommentsCard meal={meal}/>
+        {meal._id ?<CommentsCard meal={meal._id}/>:""}
+        
         <AddComment meal={meal} />
     </div>
 );

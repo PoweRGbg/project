@@ -7,11 +7,12 @@ export default function CommentsCard(props) {
 
 
     useEffect(() => {
-        getComments(props.meal._id).then(result => {
+        console.log(`Asking for ${props.meal}`);
+        getComments(props.meal).then(result => {
             if (result)
                 setComments(result)
         })
-    }, [props.meal._id]);
+    }, [props.meal]);
 
     return (
         <div className="container tm-mt-big tm-mb-big">
