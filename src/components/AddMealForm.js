@@ -11,7 +11,6 @@ export default function AddMealForm({history}) {
         getMeals().then(result => {
             if (result)
                 setMeals(result);
-                console.log(JSON.stringify(history));
         })
     }, []);
 

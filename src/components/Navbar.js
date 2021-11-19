@@ -32,7 +32,7 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto h-100">
                         <li className="nav-item">
-                            <Link className={activeButton == ""? "nav-link active":"nav-link"} to="/" onClick={clickHandler}>
+                            <Link className={activeButton === ""? "nav-link active":"nav-link"} to="/" onClick={clickHandler}>
                                 <i className="fas fa-tachometer-alt"></i>
                                 Dashboard
                                 <span className="sr-only">(current)</span>
