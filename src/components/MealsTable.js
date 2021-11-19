@@ -14,25 +14,26 @@ export default function MealsTable(props) {
 
 
 
-    return (
-        <div className="col-12 tm-block-col">
-            <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                <h2 className="tm-block-title">Meals List</h2>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">MEAL NO.</th>
-                            <th scope="col">NAME</th>
-                            <th scope="col">SERVING</th>
-                            <th scope="col">CARBS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {meals.length > 0 && meals.map(meal => <MealsTableRow meal={meal} key={meal._id} />)}
+    return ( 
 
-                    </tbody>
-                </table>
-            </div>
+        <div className="col-12 tm-block-col">
+        <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+        <h2 className="tm-block-title">Meals List</h2>
+        <table className="table">
+        <thead>
+        <tr>
+        <th scope="col">MEAL NO.</th>
+        <th scope="col">NAME</th>
+        <th scope="col">SERVING</th>
+        <th scope="col">CARBS</th>
+        </tr>
+        </thead>
+        <tbody>
+        {meals.length > 0 && meals.map(meal => <MealsTableRow meal={meal} key={meal._id} />)}
+        
+        </tbody>
+        </table>
         </div>
-    );
-}
+        </div>
+        );
+    }

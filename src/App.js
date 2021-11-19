@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Content from './components/Content';
 import NotificationsList from './components/NotificationsList';
 import MealsTable from './components/MealsTable';
+import MealDetails from './components/MealDetails';
 import FormWrapper from './components/FormWrapper';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/reports" exact component={NotificationsList} />
         <Route path="/addMeal" exact component={FormWrapper} />
         <Route path="/allmeals" component={MealsTable} />
+        <Route path="/meal/:mealId" component={MealDetails} />
       </Switch>
       <Footer />
     </div>

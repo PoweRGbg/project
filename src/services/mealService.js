@@ -34,6 +34,20 @@ export async function getMeals() {
     }
 }
 
+export async function getMealById(id) {
+    try {
+        let meals = await fetch(url + "/meals/"+id, {
+            method: 'GET'
+        });
+        let result = await meals.json();
+
+        return result;
+
+    } catch (error) {
+        console.error(`Failed fetching meal ${id}!`);
+    }
+}
+
 export function createNotification(meal) {
     let notification =
     {
