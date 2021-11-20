@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { addComment } from '../services/commentsService';
+import { useHistory } from 'react-router-dom';
 
 export default function AddComment({meal}) {
     let [newComment, setNewComment] = useState({});
+    let historyHook = useHistory();
 
     useEffect(() => {
         // console.log(`Meal id got is ${meal._id}`);
@@ -17,7 +19,7 @@ export default function AddComment({meal}) {
         newComment.date = Date.now(); 
         if (true) {
             addComment(newComment);
-            // historyHook.push('/allmeals');
+            historyHook.push(`/meal/${meal._id}`);
         }
     }
 

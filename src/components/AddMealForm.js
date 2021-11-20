@@ -30,7 +30,7 @@ export default function AddMealForm({history}) {
                 return true;
             }
             console.log(JSON.stringify(newRecipe));
-            console.log("All fields should bi filled");
+            console.log("All fields should be filled");
         return false;
     }
 

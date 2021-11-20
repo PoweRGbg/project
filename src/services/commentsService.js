@@ -29,7 +29,8 @@ export async function getComments(mealId) {
             method: 'GET'
         });
         let result = await comments.json();
-        return Object.values(result);
+        let arrayOfResults = Object.values(result).filter(x=> x.meal === mealId);
+        return arrayOfResults;
 
     } catch (error) {
         console.error(`Failed fetching comments! ${error}`);
@@ -43,8 +44,8 @@ export function createNotification(comment) {
         who: "User name",
         dateString: Date.now().toString(),
         date: Date.now(),
-        text: `Commented ${comment.name}`,
-        recipe: comment.id,
+        text: `Commented on `,
+        recipe: comment.meal,
     }
     addNotification(notification);
 }

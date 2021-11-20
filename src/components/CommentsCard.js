@@ -7,7 +7,6 @@ export default function CommentsCard(props) {
 
 
     useEffect(() => {
-        console.log(`Asking for ${props.meal}`);
         getComments(props.meal).then(result => {
             if (result)
                 setComments(result)
