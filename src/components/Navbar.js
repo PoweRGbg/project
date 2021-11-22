@@ -33,7 +33,7 @@ export default function Navbar() {
                     <ul className="navbar-nav mx-auto h-100">
                         <li className="nav-item">
                             <Link className={activeButton === ""? "nav-link active":"nav-link"} to="/" onClick={clickHandler}>
-                                <i className="fas fa-tachometer-alt"></i>
+                                <i className="fas fa-lemon"></i>
                                 Dashboard
                                 <span className="sr-only">(current)</span>
                             </Link>
@@ -47,7 +47,7 @@ export default function Navbar() {
                             ? "nav-link dropdown-toggle active"
                             :"nav-link dropdown-toggle"} to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <i className="far fa-file-alt"></i>
+                                <i className="fas fa-apple-alt"></i>
                                 <span>
                                     Meals <i className="fas fa-angle-down"></i>
                                 </span>
@@ -58,33 +58,15 @@ export default function Navbar() {
                                 <Link className="dropdown-item" to="/allmeals" onClick={clickHandler}>All meals</Link>
                             </div>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="products.html">
-                                <i className="fas fa-shopping-cart"></i>
-                                Products
-                            </Link>
-                        </li>
+                
 
                         <li className="nav-item">
                             <Link className="nav-link" to="accounts.html">
                                 <i className="far fa-user"></i>
-                                Accounts
+                                Account
                             </Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" to="/" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i className="fas fa-cog"></i>
-                                <span>
-                                    Settings <i className="fas fa-angle-down"></i>
-                                </span>
-                            </Link>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to="/">Profile</Link>
-                                <Link className="dropdown-item" to="/">Billing</Link>
-                                <Link className="dropdown-item" to="/">Customize</Link>
-                            </div>
-                        </li>
+                        
                     </ul>
                     <ul className="navbar-nav">
                         <li className="nav-item">
