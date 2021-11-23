@@ -39,7 +39,6 @@ export default function createApi(beginRequest, endRequest) {
 
         async request(endpoint, options) {
             let response;
-
             this.beginRequest();
             try {
                 response = await fetch(endpoint, options);
@@ -72,8 +71,6 @@ export default function createApi(beginRequest, endRequest) {
         async post(endpoint, body) {
             const options = this.getOptions({ 
                 'Content-Type': 'application/json',
-                'X-Authorization': sessionStorage.getItem('userToken')
- 
             });
             options.method = 'POST';
             options.body = JSON.stringify(body);

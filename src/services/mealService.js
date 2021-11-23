@@ -26,8 +26,8 @@ export const addMeal = async (meal) => {
 export async function getMeals() {
     try {
         let meals = await data.getMeals();
-        let result = await meals.json();
-        return Object.values(result);
+        // let result = await meals.json();
+        return meals;
 
     } catch (error) {
         console.error('Failed fetching meals!');

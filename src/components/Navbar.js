@@ -5,7 +5,8 @@ export default function Navbar() {
   let historyHook = useHistory();
   let [activeButton, setActive] = useState("");
   let activeNavButton = historyHook.location.pathname.split("/")[1];
-  const logged = (sessionStorage.getItem("email") || sessionStorage.getItem("userId"));
+  const logged =
+    sessionStorage.getItem("email") || sessionStorage.getItem("userId");
   //catch logout
   const logoutHandler = async function (event) {
     await window.api.logout();
@@ -77,13 +78,17 @@ export default function Navbar() {
                 </span>
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link
-                  className="dropdown-item"
-                  to="/addMeal"
-                  onClick={clickHandler}
-                >
-                  Add new meal
-                </Link>
+                {logged ? (
+                  <Link
+                    className="dropdown-item"
+                    to="/addMeal"
+                    onClick={clickHandler}
+                  >
+                    Add new meal
+                  </Link>
+                ) : (
+                  ""
+                )}
                 <Link
                   className="dropdown-item"
                   to="/reports"
@@ -121,13 +126,13 @@ export default function Navbar() {
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {logged ? (
-                    <Link
-                      className="dropdown-item"
-                      to="/addMeal"
-                      onClick={logoutHandler}
-                    >
-                      Logout
-                    </Link>
+                  <Link
+                    className="dropdown-item"
+                    to="/addMeal"
+                    onClick={logoutHandler}
+                  >
+                    Logout
+                  </Link>
                 ) : (
                   <div>
                     <Link

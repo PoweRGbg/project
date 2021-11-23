@@ -14,7 +14,8 @@ export const register = api.register.bind(api);
 export const logout = api.logout.bind(api);
 
 export async function getMeals() {
-    return await api.get(endpoints.MEALS);
+    let meals = await api.get(endpoints.MEALS);
+    return meals;
 }
 
 export async function getMeal(itemId) {

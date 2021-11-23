@@ -22,10 +22,9 @@ export default function MealsTable(props) {
         <table className="table">
         <thead>
         <tr>
-        <th scope="col">MEAL NO.</th>
+        <th scope="col"></th>
         <th scope="col">NAME</th>
-        <th scope="col">SERVING</th>
-        <th scope="col">CARBS</th>
+        <th scope="col">DESCRIPTION</th>
         </tr>
         </thead>
         <tbody>
