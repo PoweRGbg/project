@@ -70,7 +70,11 @@ export default function createApi(beginRequest, endRequest) {
         },
 
         async post(endpoint, body) {
-            const options = this.getOptions({ 'Content-Type': 'application/json' });
+            const options = this.getOptions({ 
+                'Content-Type': 'application/json',
+                'X-Authorization': sessionStorage.getItem('userToken')
+ 
+            });
             options.method = 'POST';
             options.body = JSON.stringify(body);
 
