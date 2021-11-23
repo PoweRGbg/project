@@ -25,42 +25,42 @@ export default function Login() {
   }
 
   return (
-    <div class="container tm-mt-big tm-mb-big">
-      <div class="row">
-        <div class="col-12 mx-auto tm-login-col">
-          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <div class="row">
-              <div class="col-12 text-center">
-                <h2 class="tm-block-title mb-4">Welcome to Dashboard, Login</h2>
+    <div className="container tm-mt-big tm-mb-big">
+      <div className="row">
+        <div className="col-12 mx-auto tm-login-col">
+          <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div className="row">
+              <div className="col-12 text-center">
+                <h2 className="tm-block-title mb-4">Welcome to Meals, Login</h2>
               </div>
             </div>
-            <div class="row mt-2">
-              <div class="col-12">
-                <form  onSubmit={(e) => onSubmit(e)}  method="post" class="tm-login-form">
-                  <div class="form-group">
+            <div className="row mt-2">
+              <div className="col-12">
+                <form  onSubmit={(e) => onSubmit(e)}  method="post" className="tm-login-form">
+                  <div className="form-group">
                     <label htmlFor="email">Username</label>
                     <input
                       name="email"
                       type="text"
-                      class="form-control validate"
+                      className="form-control validate"
                       id="email"
                       required
                     />
                   </div>
-                  <div class="form-group mt-3">
+                  <div className="form-group mt-3">
                     <label htmlFor="password">Password</label>
                     <input
                       name="password"
                       type="password"
-                      class="form-control validate"
+                      className="form-control validate"
                       id="password"
                       required
                     />
                   </div>
-                  <div class="form-group mt-4">
+                  <div className="form-group mt-4">
                     <button
                       type="submit"
-                      class="btn btn-primary btn-block text-uppercase"
+                      className="btn btn-primary btn-block text-uppercase"
                     >
                       Login
                     </button>
