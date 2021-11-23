@@ -5,7 +5,7 @@ const api = createApi(null, null, (msg) => alert(msg));
 
 const endpoints = {
     MEALS: 'data/meals',
-    ITEM_BY_ID: 'data/meals/',
+    ITEM_BY_ID: 'data/meals',
     MY_MEALS: 'data/meals?where=_ownerId%3D%22{userId}%22',
 };
 
@@ -13,11 +13,11 @@ export const login = api.login.bind(api);
 export const register = api.register.bind(api);
 export const logout = api.logout.bind(api);
 
-export async function getMeal() {
+export async function getMeals() {
     return await api.get(endpoints.MEALS);
 }
 
-export async function getItem(itemId) {
+export async function getMeal(itemId) {
     return await api.get(endpoints.ITEM_BY_ID +'/' + itemId);
 }
 
