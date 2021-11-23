@@ -1,14 +1,16 @@
 import uniqid from 'uniqid';
-import { url } from '../config/configuration.js'
+import { databaseUrl as url } from '../config/configuration.js'
 import { addNotification } from './notificationService.js'
+import * as data from "../api/data.js";
 
 export const addMeal = async (meal) => {
     try {
         meal.id = uniqid();
-        let response = await fetch(url + "/meals", {
+        let response = await fetch(url + "data/meals", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                'X-Authorization': sessionStorage.getItem('userToken')
             },
             body: JSON.stringify(meal)
         });
@@ -23,9 +25,7 @@ export const addMeal = async (meal) => {
 
 export async function getMeals() {
     try {
-        let meals = await fetch(url + "/meals", {
-            method: 'GET'
-        });
+        let meals = await data.getMeals();
         let result = await meals.json();
         return Object.values(result);
 
@@ -36,7 +36,7 @@ export async function getMeals() {
 
 export async function getMealById(id) {
     try {
-        let meals = await fetch(url + "/meals/"+id, {
+        let meals = await fetch(url + "data/meals/"+id, {
             method: 'GET'
         });
         let result = await meals.json();
