@@ -1,115 +1,121 @@
-import { useEffect, useState } from 'react';
-import { addMeal, getMeals } from '../services/mealService';
-import { useHistory } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { addMeal, getMeals } from "../services/mealService";
+import { useHistory } from "react-router-dom";
 
-export default function AddMealForm({history}) {
-    let historyHook = useHistory();
-    let [meals, setMeals] = useState([]);
-    let [newRecipe, setNewRecipe] = useState({});
+export default function AddMealForm({ history }) {
+  let historyHook = useHistory();
+  let [meals, setMeals] = useState([]);
 
-    useEffect(() => {
-        getMeals().then(result => {
-            if (result)
-                setMeals(result);
-        })
-    }, []);
+  useEffect(() => {
+    getMeals().then((result) => {
+      if (result) setMeals(result);
+    });
+  }, []);
+ 
 
-    function nameExists(name) {
-        if (meals.filter(meal => meal.name === name).length > 0) {
-            return true;
-        } else {
-            console.log("Recipe with this name exists");
-            return false
-        }
+  function onSubmit(e) {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    let newRecipe = {
+      name: formData.get("name"),
+      description: formData.get("description"),
+      ingredients: formData.get("ingredients"),
+      imageURL: formData.get("imageUrl"),
+      recipe: formData.get("preparation"),
+    };
+      addMeal(newRecipe);
+      console.log(`added ${newRecipe.name} to database`);
+      meals.push(newRecipe);
+      historyHook.push("/allmeals");
+  }
 
-    }
-
-    function recipeIsReady() {
-        if (newRecipe.hasOwnProperty('name') && newRecipe.hasOwnProperty('serving') && newRecipe.hasOwnProperty('carbs'))
-            if (newRecipe.name !== "" && newRecipe.serving !== "" && newRecipe.carbs !== "") {
-                return true;
-            }
-            console.log(JSON.stringify(newRecipe));
-            console.log("All fields should be filled");
-        return false;
-    }
-
-
-    function onClickHandler(e) {
-        e.preventDefault();
-        newRecipe[e.target.name] = e.target.value;
-        if (nameExists(newRecipe.name)) {
-            console.log('This meal exists already!');
-        } else {
-
-            if (recipeIsReady()) {
-                addMeal(newRecipe);
-                console.log(`added ${newRecipe.name} to database`);
-                meals.push(newRecipe);
-                historyHook.push('/allmeals');
-            }
-        }
-    }
-    const handleChange = (e) =>{
-            const name = e.target.name;
-            const value = e.target.value;
-            setNewRecipe(values => ({...values, [name]: value}))
-    }
-    return (
-        <form action="" method="GET">
-
-                <label className="tm-block-list">Name of meal</label>
-                <input
-                    name="name"
-                    type="text"
-                    className="form-control validate"
-                    id="name"
-                    required
-                    style={{
-                        'backgroundColor': '#54657d',
-                        color: '#fff',
-                        border: 0
-                    }}
-                    onChange={handleChange}
-                    />
-                <label className="tm-block-list">Serving in g.</label>
-                <input
-                    name="serving"
-                    type="number"
-                    className="form-control validate"
-                    id="serving"
-                    required
-                    onChange={handleChange}
-
-                    style={{
-                        'backgroundColor': '#54657d',
-                        color: '#fff',
-                        border: 0
-                    }}
-                    />
-                <label className="tm-block-list">Carbs in g.</label>
-                <input
-                    name="carbs"
-                    type="number"
-                    className="form-control validate"
-                    id="carbs"
-                    required
-                    onChange={handleChange}
-
-                    style={{
-                        'backgroundColor': '#54657d',
-                        color: '#fff',
-                        border: 0
-                    }}
-                    
-                    />
-            <button
-            type="submit"
-            className="btn btn-primary btn-block text-uppercase"
-            onClick={(e) => { onClickHandler(e) }}
-            >
-                Add meal
-            </button>
-        </form>
-        );
-    }
+  const handleChange = (e) => {
+  };
+  
+  return (
+    <form
+      action=""
+      method="POST"
+      onSubmit={(e) => {
+        onSubmit(e);
+      }}
+    >
+      <label className="tm-block-list">Name of meal</label>
+      <input
+        name="name"
+        type="text"
+        className="form-control validate"
+        id="name"
+        required
+        style={{
+          backgroundColor: "#54657d",
+          color: "#fff",
+          border: 0,
+        }}
+        onChange={handleChange}
+      />
+      <label className="tm-block-list">Short description</label>
+      <input
+        name="description"
+        type="text"
+        className="form-control validate"
+        id="description"
+        required
+        onChange={handleChange}
+        style={{
+          backgroundColor: "#54657d",
+          color: "#fff",
+          border: 0,
+        }}
+      />
+      <label className="tm-block-list">Image</label>
+      <input
+        name="imageUrl"
+        type="text"
+        className="form-control validate"
+        id="imageUrl"
+        required
+        onChange={handleChange}
+        style={{
+          backgroundColor: "#54657d",
+          color: "#fff",
+          border: 0,
+        }}
+      />
+      <label className="tm-block-list">Ingredients list</label>
+      <textarea
+        name="ingredients"
+        type="text"
+        className="form-control validate"
+        id="ingredients"
+        required
+        onChange={handleChange}
+        style={{
+          backgroundColor: "#54657d",
+          color: "#fff",
+          border: 0,
+        }}
+      />
+      <label className="tm-block-list">Preparation</label>
+      <textarea
+        name="preparation"
+        type="text"
+        className="form-control validate"
+        id="ingredients"
+        required
+        onChange={handleChange}
+        style={{
+          backgroundColor: "#54657d",
+          color: "#fff",
+          border: 0,
+        }}
+      />
+      <button
+        type="submit"
+        className="btn btn-primary btn-block text-uppercase"
+      >
+        Add recipe
+      </button>
+    </form>
+  );
+}
