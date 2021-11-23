@@ -51,7 +51,7 @@ export async function getMealById(id) {
 export function createNotification(meal) {
     let notification =
     {
-        who: "User name",
+        who: sessionStorage.getItem('email'),
         dateString: Date.now().toString(),
         date: Date.now(),
         text: `Added ${meal.name}`,
