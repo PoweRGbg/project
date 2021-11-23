@@ -1,8 +1,11 @@
 
 import * as api from '../api/data.js';
+import { useHistory } from 'react-router-dom';
+
 window.api = api;
 
 export default function RegisterUser(props){
+    let historyHook = useHistory();
 
     async function onSubmit(event){
         event.preventDefault();
@@ -20,6 +23,10 @@ export default function RegisterUser(props){
         }
     
         await window.api.register(email, password);
+        if(sessionStorage.getItem('email')){
+            historyHook.push(`/`);
+            console.log(`User ${email} logged in!`);
+        }
         console.log(`User ${email} registered and logged in!`);
         // ctx.page.redirect('/');
     }

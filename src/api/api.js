@@ -111,16 +111,21 @@ export default function createApi(beginRequest, endRequest) {
         },
 
         async login(email, password) {
-            const result = await this.post(endpoints.LOGIN, {
-                email,
-                password
-            });
-
-            sessionStorage.setItem('userToken', result['accessToken']);
-            sessionStorage.setItem('email', result.email);
-            sessionStorage.setItem('userId', result._id);
-
-            return result;
+            try {
+                
+                const result = await this.post(endpoints.LOGIN, {
+                    email,
+                    password
+                });
+    
+                sessionStorage.setItem('userToken', result['accessToken']);
+                sessionStorage.setItem('email', result.email);
+                sessionStorage.setItem('userId', result._id);
+    
+                return result;
+            } catch (error) {
+                console.error(error.message);         
+            }
         },
 
         async logout() {
