@@ -6,6 +6,7 @@ import NotificationsList from './components/NotificationsList';
 import MealsTable from './components/MealsTable';
 import MealDetails from './components/MealDetails';
 import FormWrapper from './components/FormWrapper';
+import RegisterUser from './components/RegisterUser';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/addMeal" exact component={FormWrapper} />
         <Route path="/allmeals" component={MealsTable} />
         <Route path="/meal/:mealId" component={MealDetails} />
+        <Route path="/register" component={RegisterUser} />
       </Switch>
       <Footer />
     </div>
