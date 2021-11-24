@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMealById } from "../services/mealService";
+import { getMealById, deleteMeal } from "../services/mealService";
 import AddComment from "./AddComment";
 import CommentsCard from "./CommentsCard";
 import { useHistory } from "react-router-dom";
@@ -26,7 +26,8 @@ function editButtonHandler(e){
 }
 function deleteButtonHandler(e){
     e.preventDefault();
-    historyHook.push(`/delete/${meal._id}`)
+    deleteMeal(meal);
+    historyHook.push(`/allmeals`)
 }
 
 return (

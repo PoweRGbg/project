@@ -31,7 +31,6 @@ export const editMeal = async (meal) => {
             body: JSON.stringify(meal)
         });
         let result = await response.json();
-        console.log(`Response is: ${JSON.stringify(response)}`);
         // Notification for Edit
         let notification =
         {
@@ -39,6 +38,34 @@ export const editMeal = async (meal) => {
             dateString: Date.now().toString(),
             date: Date.now(),
             text: `Editted ${meal.name}`,
+            recipe: meal.id,
+        }
+        addNotification(notification);
+        return result;
+    } catch (error) {
+        console.error(error)
+    };
+
+}
+
+export const deleteMeal = async (meal) => {
+    try {
+        let response = await fetch(url + "data/meals/"+meal._id, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'X-Authorization': sessionStorage.getItem('userToken')
+            },
+            body: JSON.stringify(meal)
+        });
+        let result = await response.json();
+        // Notification for Edit
+        let notification =
+        {
+            who: sessionStorage.getItem('email'),
+            dateString: Date.now().toString(),
+            date: Date.now(),
+            text: `Deleted ${meal.name}`,
             recipe: meal.id,
         }
         addNotification(notification);
