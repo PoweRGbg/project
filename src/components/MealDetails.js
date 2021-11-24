@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { getMealById } from "../services/mealService";
 import AddComment from "./AddComment";
 import CommentsCard from "./CommentsCard";
+import { useHistory } from "react-router-dom";
+
 export default function MealDetails({ match }) {
     let [meal, setMeal] = useState([]);
+    let historyHook = useHistory();
 
     useEffect(() => {
         async function fetchData(){
@@ -16,6 +19,15 @@ export default function MealDetails({ match }) {
         })
 
 }, [match.params.mealId]);
+
+function editButtonHandler(e){
+    e.preventDefault();
+    historyHook.push(`/edit/${meal._id}`)
+}
+function deleteButtonHandler(e){
+    e.preventDefault();
+    historyHook.push(`/delete/${meal._id}`)
+}
 
 return (
     <div>
@@ -60,6 +72,16 @@ return (
 
                                 </div>
 
+                                {meal._ownerId === sessionStorage.getItem('userId')?
+                                <button className="btn btn-primary btn-block text-uppercase" onClick={editButtonHandler}>
+                                Edit
+                                </button>
+                                :""}
+                                {meal._ownerId === sessionStorage.getItem('userId')?
+                                <button className="btn btn-primary btn-block text-uppercase" onClick={deleteButtonHandler}>
+                                Delete
+                                </button>
+                                :""}
                             </div>
 
                         </div>
