@@ -31,76 +31,74 @@ function deleteButtonHandler(e){
 }
 
 return (
-    <div>
-        <div className="container tm-mt-big tm-mb-big" >
+    <div className="container tm-mt-big tm-mb-big">
+      <div className="row">
+        <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
             <div className="row">
-                <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-                    <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
-                        <div className="row">
-                            <div className="col-12">
-                                <h2 className="tm-block-title d-inline-block">Meal Details</h2>
-                            </div>
-                        </div>
-                        <div className="row tm-edit-product-row">
-                            <div className="col-xl-6 col-lg-6 col-md-12">
-                                <div className="form-group mb-3 col-12">
-                                    <label
-                                        htmlFor="name"
-                                    >Meal Name
-                                    </label>
-                                    <h3>{meal.name}</h3>
-                                </div>
-                                <div className="form-group mb-3 col-12">
-                                    <label
-                                        htmlFor="description"
-                                    >description</label>
-                                    <h3>{meal.description}</h3>
-
-                                </div>
-
-                                <div className="form-group mb-3 col-12">
-                                    <label
-                                        htmlFor="Ingredients"
-                                    >Ingredients</label>
-                                    <h3>{meal.ingredients}</h3>
-
-                                </div>
-                                <div className="form-group mb-3 col-12">
-                                    <label
-                                        htmlFor="preparation"
-                                    >Preparation</label>
-                                    <h3>{meal.recipe}</h3>
-
-                                </div>
-                                <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                                    <div className="tm-product-img-edit mx-auto">
-                                        <img src={meal.imageURL} alt="Meal" className="img-fluid d-block mx-auto" />
-                        
-                                    </div>
-                                    <div className="custom-file mt-3 mb-3">
-                                        <input id="fileInput" type="file" style={{display:"none"}} />
-                                    </div>
-                                </div>
-                                {meal._ownerId === sessionStorage.getItem('userId')?
-                                <button className="btn btn-primary btn-block text-uppercase" onClick={editButtonHandler}>
-                                Edit
-                                </button>
-                                :""}
-                                {meal._ownerId === sessionStorage.getItem('userId')?
-                                <button className="btn btn-primary btn-block text-uppercase" onClick={deleteButtonHandler}>
-                                Delete
-                                </button>
-                                :""}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+              <div className="col-12">
+              </div>
             </div>
-        </div >
-        {meal._id ?<CommentsCard meal={meal._id}/>:""}
-        
-        <AddComment meal={meal} />
+            <div className="row tm-edit-product-row">
+            <div className="tm-product-img-edit mx-auto">
+                  <img src={meal.imageURL} alt="MealShot" className="img-fluid d-block mx-auto"/>
+                  <i
+                    className="fas fa-cloud-upload-alt tm-upload-icon"
+                    onclick="document.getElementById('fileInput').click();"
+                  ></i>
+                </div>
+              <div className="col-xl-6 col-lg-6 col-md-12">
+                  <div className="form-group mb-3">
+                    <label
+                      for="name"
+                      >Meal Name
+                    </label>
+                    <h4>{meal.name}</h4>
+                  </div>
+                  <div className="form-group mb-3">
+                    <label
+                      for="description"
+                      >Description</label
+                    >
+                    <h5>{meal.description}</h5>
+                  </div>
+                  <div className="form-group mb-3">
+                    <label
+                      for="ingredients"
+                      >Ingredients needed</label
+                    >
+                    <h5>{meal.ingredients}</h5>
+                  </div>
+                  <div className="form-group mb-3">
+                    <label
+                      for="recipe"
+                      >Preparation</label
+                    >
+                    <h5>{meal.recipe}</h5>
+                  </div>
+                  
+                  <div className="row">
+                      
+                  <div className="custom-file mt-3 mb-3">
+                  
+                  {meal._ownerId === sessionStorage.getItem('userId')
+                    ?
+                    <div className="col-6">
+                        <button type="submit" className="btn btn-primary btn-block text-uppercase" onClick={editButtonHandler}>Edit</button>
+                        <button type="submit" className="btn btn-primary btn-block text-uppercase" onClick={deleteButtonHandler}>Delete</button>
+                    </div>
+                    :""
+                  }
+                </div>
+                  </div>
+                  
+              </div>
+            </div>
+        </div>
+            <AddComment meal={meal}/>
+            <CommentsCard meal={meal}/>
+        </div>
+      </div>
     </div>
 );
 }
