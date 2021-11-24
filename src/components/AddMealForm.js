@@ -101,7 +101,7 @@ export default function AddMealForm({ history }) {
         name="preparation"
         type="text"
         className="form-control validate"
-        id="ingredients"
+        id="preparation"
         required
         onChange={handleChange}
         style={{

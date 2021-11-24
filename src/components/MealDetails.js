@@ -40,15 +40,23 @@ return (
                                 <div className="form-group mb-3 col-12">
                                     <label
                                         htmlFor="description"
-                                    >Serving</label>
-                                    <h3>{meal.serving}</h3>
+                                    >description</label>
+                                    <h3>{meal.description}</h3>
+
+                                </div>
+
+                                <div className="form-group mb-3 col-12">
+                                    <label
+                                        htmlFor="Ingredients"
+                                    >Ingredients</label>
+                                    <h3>{meal.ingredients}</h3>
 
                                 </div>
                                 <div className="form-group mb-3 col-12">
                                     <label
-                                        htmlFor="description"
-                                    >Carbs per serving</label>
-                                    <h3>{meal.carbs}</h3>
+                                        htmlFor="preparation"
+                                    >Preparation</label>
+                                    <h3>{meal.recipe}</h3>
 
                                 </div>
 
