@@ -19,7 +19,7 @@ export default function MealsTable(props) {
         <div className="col-12 tm-block-col">
         <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
         <h2 className="tm-block-title">Meals List</h2>
-        <table className="table">
+        <table className="table table-hover tm-table-small tm-product-table">
         <thead>
         <tr>
         <th scope="col"></th>

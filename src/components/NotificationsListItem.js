@@ -12,7 +12,7 @@ export default function NotificationsListItem({ notification }) {
   }
   return (
     <div className="media tm-notification-item">
-      <div className="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar" className="rounded-circle" /></div>
+      <div className="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar" className="rounded-circle img-small" /></div>
       <div className="media-body">
         <p className="mb-2"><b>{notification?.who}</b> {notification.text} <a href="/"
           className="tm-notification-link">{notification.recipeName}</a></p>
