@@ -2,3 +2,4 @@
 
 
 ## Simply run it with 
+npm start
