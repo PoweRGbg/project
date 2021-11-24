@@ -92,11 +92,7 @@ return (
               </div>
             </div>
         </div>
-        { sessionStorage.getItem('email') 
-        ? 
             <CommentsCard meal={meal}/>
-            : ""
-        }
         </div>
       </div>
     </div>

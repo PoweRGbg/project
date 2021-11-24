@@ -52,59 +52,64 @@ export default function Navbar() {
                 onClick={clickHandler}
               >
                 <i className="fas fa-lemon"></i>
-                Dashboard
+                All meals
                 <span className="sr-only">(current)</span>
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <Link
-                className={
-                  activeButton === "allmeals" ||
-                  activeButton === "reports" ||
-                  activeButton === "addMeal"
-                    ? "nav-link dropdown-toggle active"
-                    : "nav-link dropdown-toggle"
-                }
-                to="/"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i className="fas fa-apple-alt"></i>
-                <span>
-                  Meals <i className="fas fa-angle-down"></i>
-                </span>
-              </Link>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {logged ? (
+            {sessionStorage.getItem("email") ? (
+              <li className="nav-item dropdown">
+                <Link
+                  className={
+                    activeButton === "allmeals" ||
+                    activeButton === "reports" ||
+                    activeButton === "addMeal"
+                      ? "nav-link dropdown-toggle active"
+                      : "nav-link dropdown-toggle"
+                  }
+                  to="/"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i className="fas fa-apple-alt"></i>
+                  <span>
+                    Meals <i className="fas fa-angle-down"></i>
+                  </span>
+                </Link>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {logged ? (
+                    <Link
+                      className="dropdown-item"
+                      to="/addMeal"
+                      onClick={clickHandler}
+                    >
+                      Add new meal
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                   <Link
                     className="dropdown-item"
-                    to="/addMeal"
+                    to="/reports"
                     onClick={clickHandler}
                   >
-                    Add new meal
+                    Latest actions
                   </Link>
-                ) : (
-                  ""
-                )}
-                <Link
-                  className="dropdown-item"
-                  to="/reports"
-                  onClick={clickHandler}
-                >
-                  Latest actions
-                </Link>
-                <Link
-                  className="dropdown-item"
-                  to="/allmeals"
-                  onClick={clickHandler}
-                >
-                  All meals
-                </Link>
-              </div>
-            </li>
+                  <Link
+                    className="dropdown-item"
+                    to="/allmeals"
+                    onClick={clickHandler}
+                  >
+                    All meals
+                  </Link>
+                </div>
+              </li>
+            ) : (
+              ""
+            )}
+
             <li className="nav-item dropdown">
               <Link
                 className={

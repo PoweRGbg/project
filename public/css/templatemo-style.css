@@ -326,9 +326,12 @@ thead {
   margin-bottom: 20px;
 }
 .form-control {
-  padding: 19px 18px;
+  padding-top: 10px;
+    padding-right: 18px;
+    padding-bottom: 10px;
+    padding-left: 18px;
   border-radius: 0;
-  height: 50px;
+  height: 100%;
   background-color: #60738e;
   color: #fff;
   border-color: transparent;
