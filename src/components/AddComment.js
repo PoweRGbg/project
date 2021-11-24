@@ -1,32 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { addComment } from '../services/commentsService';
 import { useHistory } from 'react-router-dom';
 
 export default function AddComment({meal}) {
-    let [newComment, setNewComment] = useState({});
     let historyHook = useHistory();
+    let newComment = {};
 
     useEffect(() => {
-        // console.log(`Meal id got is ${meal._id}`);
-    }, []);
+        console.log(`Meal id got is ${meal._id}`);
+    }, [meal._id]);
 
 
     function onClickHandler(e) {
         e.preventDefault();
-        // newComment.text = e.target.value;
-        newComment.user = "current user"
+        let formData = new FormData(e.target)
+        newComment.text = formData.text;
+        newComment.user = sessionStorage.getItem('email');
         newComment.meal = meal._id;
         newComment.date = Date.now(); 
         if (true) {
             addComment(newComment);
             historyHook.push(`/meal/${meal._id}`);
         }
-    }
-
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setNewComment(values => ({ ...values, [name]: value }))
     }
 
     return (
@@ -37,7 +32,7 @@ export default function AddComment({meal}) {
                         <tbody>
                             <tr>
                                 <td>
-                                    <form action="" method="GET">
+                                    <form action="" method="GET" onSubmit={onClickHandler}>
 
                                         <label className="tm-block-list ">Your Comment</label>
                                         <textarea
@@ -51,12 +46,10 @@ export default function AddComment({meal}) {
                                                 color: '#fff',
                                                 border: 0
                                             }}
-                                            onChange={handleChange}
                                         ></textarea>
                                         <button
                                             type="submit"
                                             className="btn btn-primary btn-block text-uppercase"
-                                            onClick={(e) => { onClickHandler(e) }}
                                         >
                                             Add comment
                                         </button>

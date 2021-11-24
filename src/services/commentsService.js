@@ -21,7 +21,7 @@ export const addComment = async (comment) => {
 
 export async function getComments(mealId) {
     
-    const commentsUrl = url + `/comments?where=meal%3D%22${mealId}%22`;
+    const commentsUrl = url + `/comments`;
     // const commentsUrl = url + `/comments`;
     try {
 
@@ -41,10 +41,10 @@ export async function getComments(mealId) {
 export function createNotification(comment) {
     let notification =
     {
-        who: "User name",
+        who: sessionStorage.getItem('email'),
         dateString: Date.now().toString(),
         date: Date.now(),
-        text: `Commented on `,
+        text: `Commented  `,
         recipe: comment.meal,
     }
     addNotification(notification);

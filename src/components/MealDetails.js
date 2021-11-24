@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getMealById, deleteMeal } from "../services/mealService";
-import AddComment from "./AddComment";
 import CommentsCard from "./CommentsCard";
 import { useHistory } from "react-router-dom";
 
@@ -16,7 +15,9 @@ export default function MealDetails({ match }) {
         }
         fetchData().then(result =>{
             setMeal(result);
-        })
+        }).then(
+            window.scrollTo(0, 0)
+        )
 
 }, [match.params.mealId]);
 
@@ -49,28 +50,28 @@ return (
                       htmlFor="name"
                       >Meal Name
                     </label>
-                    <h4>{meal.name}</h4>
+                    <h4 className="form-control">{meal.name}</h4>
                   </div>
                   <div className="form-group mb-3">
                     <label
                       htmlFor="description"
                       >Description</label
                     >
-                    <h5>{meal.description}</h5>
+                    <h5 className="form-control">{meal.description}</h5>
                   </div>
                   <div className="form-group mb-3">
                     <label
                       htmlFor="ingredients"
                       >Ingredients needed</label
                     >
-                    <h5>{meal.ingredients}</h5>
+                    <h5 className="form-control">{meal.ingredients}</h5>
                   </div>
                   <div className="form-group mb-3">
                     <label
                       htmlFor="recipe"
                       >Preparation</label
                     >
-                    <h5>{meal.recipe}</h5>
+                    <h5 className="form-control">{meal.recipe}</h5>
                   </div>
                   
                   <div className="row">
@@ -91,8 +92,11 @@ return (
               </div>
             </div>
         </div>
-            <AddComment meal={meal}/>
+        { sessionStorage.getItem('email') 
+        ? 
             <CommentsCard meal={meal}/>
+            : ""
+        }
         </div>
       </div>
     </div>
