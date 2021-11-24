@@ -42,36 +42,32 @@ return (
             <div className="row tm-edit-product-row">
             <div className="tm-product-img-edit mx-auto">
                   <img src={meal.imageURL} alt="MealShot" className="img-fluid d-block mx-auto"/>
-                  <i
-                    className="fas fa-cloud-upload-alt tm-upload-icon"
-                    onclick="document.getElementById('fileInput').click();"
-                  ></i>
                 </div>
               <div className="col-xl-6 col-lg-6 col-md-12">
                   <div className="form-group mb-3">
                     <label
-                      for="name"
+                      htmlFor="name"
                       >Meal Name
                     </label>
                     <h4>{meal.name}</h4>
                   </div>
                   <div className="form-group mb-3">
                     <label
-                      for="description"
+                      htmlFor="description"
                       >Description</label
                     >
                     <h5>{meal.description}</h5>
                   </div>
                   <div className="form-group mb-3">
                     <label
-                      for="ingredients"
+                      htmlFor="ingredients"
                       >Ingredients needed</label
                     >
                     <h5>{meal.ingredients}</h5>
                   </div>
                   <div className="form-group mb-3">
                     <label
-                      for="recipe"
+                      htmlFor="recipe"
                       >Preparation</label
                     >
                     <h5>{meal.recipe}</h5>
