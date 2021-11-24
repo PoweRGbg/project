@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMealById, editMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
-
+import './MealDetails.css';
 
 export default function MealEdit({ match }){
     let [meal, setMeal] = useState([]);
@@ -122,19 +122,17 @@ function onSubmit(e) {
                                 </div>
                             </form>
                             </div>
-                            <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
-                                <div className="tm-product-img-edit mx-auto">
-                                <img src={meal.imageURL} alt="Meal" className="img-fluid d-block mx-auto" />
-                                <i
-                                    className="fas fa-cloud-upload-alt tm-upload-icon"
-                                    ></i>
-                                </div>
-                                <div className="custom-file mt-3 mb-3">
-                                <input id="fileInput" type="file" style={{display:"none"}} />
-                                </div>
-                            </div>
-                            </div>
-                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                        <div className="tm-product-img-edit mx-auto">
+                        <img src={meal.imageURL} alt="Meal" className="img-fluid d-block mx-auto" />
+                
+                        </div>
+                        <div className="custom-file mt-3 mb-3">
+                        <input id="fileInput" type="file" style={{display:"none"}} />
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>)

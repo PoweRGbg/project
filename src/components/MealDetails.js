@@ -72,7 +72,15 @@ return (
                                     <h3>{meal.recipe}</h3>
 
                                 </div>
-
+                                <div className="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                                    <div className="tm-product-img-edit mx-auto">
+                                        <img src={meal.imageURL} alt="Meal" className="img-fluid d-block mx-auto" />
+                        
+                                    </div>
+                                    <div className="custom-file mt-3 mb-3">
+                                        <input id="fileInput" type="file" style={{display:"none"}} />
+                                    </div>
+                                </div>
                                 {meal._ownerId === sessionStorage.getItem('userId')?
                                 <button className="btn btn-primary btn-block text-uppercase" onClick={editButtonHandler}>
                                 Edit
