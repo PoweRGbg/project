@@ -9,7 +9,7 @@ export default function MealsTableRow({ meal }) {
   return (
     <tr>
       <th scope="row">
-        <input type="checkbox" />
+        <input type="checkbox" id={meal._id} name={meal._id} />
       </th>
       <td className="tm-product-name">
         <Link to={"/meals/" + meal._id} className="tm-notification-link" >

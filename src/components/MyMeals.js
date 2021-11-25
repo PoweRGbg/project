@@ -6,11 +6,17 @@ export default function MyMeals(props) {
   let [meals, setMeals] = useState([]);
 
   useEffect(() => {
-      if(sessionStorage.getItem('userId'))
-    getMealsByOwner(sessionStorage.getItem('userId')).then((result) => {
-      if (result) setMeals(result);
-    });
+    if (sessionStorage.getItem("userId"))
+      getMealsByOwner(sessionStorage.getItem("userId")).then((result) => {
+        if (result) setMeals(result);
+      });
   }, []);
+
+  function onSubmit(e) {
+      e.preventDefault();
+      let formData = new FormData(e.target)
+    console.log(`${JSON.stringify(formData)}`);
+  }
 
   return (
     <div className="container mt-5">
@@ -18,23 +24,34 @@ export default function MyMeals(props) {
         <div className="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
           <div className="tm-bg-primary-dark tm-block tm-block-products">
             <div className="tm-product-table-container">
-              <table className="table table-hover tm-table-small tm-product-table">
-                <thead>
-                  <tr>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">MEAL NAME</th>
-                    <th scope="col">DESCRIPTION</th>
-                    <th scope="col">DATE ADDED</th>
-                    <th scope="col">&nbsp;</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {meals.length > 0 &&
-                    meals.map((meal) => (
-                      <MyMealsRow meal={meal} key={meal._id} />
-                    ))}
-                </tbody>
-              </table>
+              <form method="POST" onSubmit={onSubmit}>
+                <table className="table table-hover tm-table-small tm-product-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">&nbsp;</th>
+                      <th scope="col">MEAL NAME</th>
+                      <th scope="col">DESCRIPTION</th>
+                      <th scope="col">DATE ADDED</th>
+                      <th scope="col">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {meals.length > 0 ? (
+                      meals.map((meal) => (
+                        <MyMealsRow meal={meal} key={meal._id} />
+                      ))
+                    ) : (
+                      ""
+                    )}
+                  </tbody>
+                </table>
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block text-uppercase"
+                    >
+                      Delete selected products
+                    </button>
+              </form>
             </div>
             {/* <!-- table container --> */}
             <a
@@ -43,9 +60,6 @@ export default function MyMeals(props) {
             >
               Add new recipe
             </a>
-            <button className="btn btn-primary btn-block text-uppercase">
-              Delete selected products
-            </button>
           </div>
         </div>
         <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
