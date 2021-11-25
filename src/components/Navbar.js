@@ -16,8 +16,6 @@ export default function Navbar() {
 
   useEffect(() => {
     let splitted = historyHook.location.pathname.split("/")[1];
-    console.log(`splitted: ${splitted}`);
-    console.log(`Current button is ${splitted}`);
     setActive(splitted);
   }, [historyHook.location.pathname]);
   
@@ -108,10 +106,10 @@ export default function Navbar() {
                   </Link>
                   <Link
                     className="dropdown-item"
-                    to="/allmeals"
+                    to="/meals/mymeals"
                     onClick={clickHandler}
                   >
-                    All meals
+                    My meals
                   </Link>
                 </div>
               </li>

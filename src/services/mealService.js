@@ -101,6 +101,16 @@ export async function getMealById(id) {
     }
 }
 
+export async function getMealsByOwner(ownerId) {
+    try {
+        let meals = await data.getMyMeals(ownerId);
+        return meals;
+
+    } catch (error) {
+        console.error('Failed fetching meals for '+ownerId);
+    }
+}
+
 export function createNotification(meal) {
     let notification =
     {

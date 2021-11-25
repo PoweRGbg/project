@@ -9,6 +9,7 @@ import FormWrapper from './components/FormWrapper';
 import RegisterUser from './components/RegisterUser';
 import Login from './components/Login';
 import MealEdit from './components/MealEdit';
+import MyMeals from './components/MyMeals';
 import {useEffect} from 'react';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/notifications" exact component={NotificationsList} />
         <Route path="/addMeal" exact component={FormWrapper} />
         <Route path="/allmeals" component={MealsTable} />
+        <Route path="/meals/mymeals" component={MyMeals} />
         <Route path="/meals/:mealId" component={MealDetails} />
         <Route path="/edit/:mealId" component={MealEdit} />
         <Route path="/register" component={RegisterUser} />

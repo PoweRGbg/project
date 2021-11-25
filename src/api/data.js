@@ -34,7 +34,7 @@ export async function deleteItem(id, item) {
     return await api.delete(endpoints.ITEM_BY_ID +'/'+ id, item);
 }
 
-export async function getMyMeal(userId) {
+export async function getMyMeals(userId) {
     console.log(endpoints.MEALS + `?where=_ownerId%3D%22${userId}%22`);
     return await api.get(endpoints.MEALS + `?where=_ownerId%3D%22${userId}%22`);
 }
