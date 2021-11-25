@@ -11,6 +11,7 @@ import Login from './components/Login';
 import MealEdit from './components/MealEdit';
 
 function App() {
+  
   return (
     <div className="" id="home">
       <Navbar />

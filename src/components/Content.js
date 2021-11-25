@@ -13,8 +13,6 @@ export default function content() {
                 </div>
             </div>
             <div className="row tm-content-row">
-                {/* <LoginForm /> */}
-
                 <MealsTable title="Latest meals" />
             </div>
         </div>
