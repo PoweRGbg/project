@@ -1,2 +1,2 @@
-export const url = 'http://localhost:3030/jsonstore';
-export const databaseUrl = 'http://localhost:3030/';
+export const url = 'https://rumen-serve.herokuapp.com/jsonstore';
+export const databaseUrl = 'https://rumen-serve.herokuapp.com/';
