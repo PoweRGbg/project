@@ -1,10 +1,10 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 
 export default function Navbar() {
   let historyHook = useHistory();
   let [activeButton, setActive] = useState("");
-  let activeNavButton = historyHook.location.pathname.split("/")[1];
+  
   const logged =
     sessionStorage.getItem("email") || sessionStorage.getItem("userId");
   //catch logout
@@ -13,16 +13,27 @@ export default function Navbar() {
     setActive("");
     historyHook.push(`/`);
   };
+
+  useEffect(() => {
+    console.log('we are at '+ historyHook.location.pathname);
+    let currentButton = historyHook.location.pathname;
+    if (currentButton === undefined) {
+      currentButton = "";
+    }
+    console.log(`Current button is ${currentButton}`);
+    setActive(currentButton);
+  }, [historyHook.location.pathname]);
+  
   const clickHandler = function (e) {
     if (!e.target.href) {
       e.target.href = "";
     }
     let locationSplitted = e.target.href.split("/");
-    activeNavButton = locationSplitted[locationSplitted.length - 1];
-    if (activeNavButton === undefined) {
-      activeNavButton = "";
+    let currentButton = locationSplitted[locationSplitted.length - 1];
+    if (currentButton === undefined) {
+      currentButton = "";
     }
-    setActive(activeNavButton);
+    setActive(currentButton);
   };
 
   return (
@@ -47,7 +58,7 @@ export default function Navbar() {
           <ul className="navbar-nav mx-auto h-100">
             <li className="nav-item">
               <Link
-                className={activeButton === "" ? "nav-link active" : "nav-link"}
+                className={activeButton === "/" ? "nav-link active" : "nav-link"}
                 to="/"
                 onClick={clickHandler}
               >
@@ -60,9 +71,9 @@ export default function Navbar() {
               <li className="nav-item dropdown">
                 <Link
                   className={
-                    activeButton === "allmeals" ||
-                    activeButton === "reports" ||
-                    activeButton === "addMeal"
+                    activeButton === "/allmeals" ||
+                    activeButton === "/notifications" ||
+                    activeButton === "/addMeal"
                       ? "nav-link dropdown-toggle active"
                       : "nav-link dropdown-toggle"
                   }
@@ -92,7 +103,7 @@ export default function Navbar() {
                   )}
                   <Link
                     className="dropdown-item"
-                    to="/reports"
+                    to="/notifications"
                     onClick={clickHandler}
                   >
                     Latest actions

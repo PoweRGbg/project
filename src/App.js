@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Content} />
-        <Route path="/reports" exact component={NotificationsList} />
+        <Route path="/notifications" exact component={NotificationsList} />
         <Route path="/addMeal" exact component={FormWrapper} />
         <Route path="/allmeals" component={MealsTable} />
         <Route path="/meal/:mealId" component={MealDetails} />
