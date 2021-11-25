@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Content from './components/Content';
@@ -9,8 +9,14 @@ import FormWrapper from './components/FormWrapper';
 import RegisterUser from './components/RegisterUser';
 import Login from './components/Login';
 import MealEdit from './components/MealEdit';
+import {useEffect} from 'react';
 
 function App() {
+  let historyHook = useLocation();
+
+  useEffect(() => {
+    console.log('APP we are at '+ historyHook.pathname);
+  }, [historyHook]);
   
   return (
     <div className="" id="home">
@@ -20,7 +26,7 @@ function App() {
         <Route path="/notifications" exact component={NotificationsList} />
         <Route path="/addMeal" exact component={FormWrapper} />
         <Route path="/allmeals" component={MealsTable} />
-        <Route path="/meal/:mealId" component={MealDetails} />
+        <Route path="/meals/:mealId" component={MealDetails} />
         <Route path="/edit/:mealId" component={MealEdit} />
         <Route path="/register" component={RegisterUser} />
         <Route path="/login" component={Login} />

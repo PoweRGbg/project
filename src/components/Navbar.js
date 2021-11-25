@@ -4,7 +4,7 @@ import { useState , useEffect} from "react";
 export default function Navbar() {
   let historyHook = useHistory();
   let [activeButton, setActive] = useState("");
-  
+
   const logged =
     sessionStorage.getItem("email") || sessionStorage.getItem("userId");
   //catch logout
@@ -15,13 +15,10 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    console.log('we are at '+ historyHook.location.pathname);
-    let currentButton = historyHook.location.pathname;
-    if (currentButton === undefined) {
-      currentButton = "";
-    }
-    console.log(`Current button is ${currentButton}`);
-    setActive(currentButton);
+    let splitted = historyHook.location.pathname.split("/")[1];
+    console.log(`splitted: ${splitted}`);
+    console.log(`Current button is ${splitted}`);
+    setActive(splitted);
   }, [historyHook.location.pathname]);
   
   const clickHandler = function (e) {
@@ -58,7 +55,7 @@ export default function Navbar() {
           <ul className="navbar-nav mx-auto h-100">
             <li className="nav-item">
               <Link
-                className={activeButton === "/" ? "nav-link active" : "nav-link"}
+                className={activeButton === "" ? "nav-link active" : "nav-link"}
                 to="/"
                 onClick={clickHandler}
               >
@@ -71,9 +68,10 @@ export default function Navbar() {
               <li className="nav-item dropdown">
                 <Link
                   className={
-                    activeButton === "/allmeals" ||
-                    activeButton === "/notifications" ||
-                    activeButton === "/addMeal"
+                    activeButton === "meals" ||
+                    activeButton === "allmeals" ||
+                    activeButton === "notifications" ||
+                    activeButton === "addMeal"
                       ? "nav-link dropdown-toggle active"
                       : "nav-link dropdown-toggle"
                   }
