@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import "./MealsTableRow.css";
 
-export default function MealsTableRow({ meal }) {
+export default function MealsTableRow({ meal, onDelete }) {
   function convertDate() {
     let date = new Date(meal._createdOn);
     return date.toDateString();
+  }
+
+  function handleButtonClick(meal){
+    console.log(JSON.stringify(meal));
   }
   return (
     <tr>
@@ -20,7 +24,7 @@ export default function MealsTableRow({ meal }) {
       <td>{convertDate()}</td>
       <td>
         <Link to={"/meals/" + meal._id} className="tm-product-delete-link">
-          <i className="far fa-trash-alt tm-product-delete-icon"></i>
+          <i className="far fa-trash-alt tm-product-delete-icon" onClick={handleButtonClick(meal._id)}></i>
         </Link>
       </td>
     </tr>

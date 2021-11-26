@@ -61,6 +61,10 @@ export default function MyMeals(props) {
     setNote("");
   }
 
+  function deleteButtonHandler(e){
+    console.log(JSON.stringify(e));
+  }
+
   async function getMeals(arrayOfIds) {
     let result = [];
     for (let i = 0; i < arrayOfIds.length; i++) {
@@ -108,7 +112,7 @@ export default function MyMeals(props) {
                       <tbody>
                         {meals.length > 0 ? (
                           meals.map((meal) => (
-                            <MyMealsRow meal={meal} key={meal._id} />
+                            <MyMealsRow meal={meal} key={meal._id} onDeleteClick={deleteButtonHandler} />
                           ))
                         ) : (
                           <tr>
@@ -150,6 +154,7 @@ export default function MyMeals(props) {
                       <MyMealsNotificationsTableRow
                         key={notification._id}
                         notification={notification}
+                        
                       />
                     ))}
                 </tbody>
