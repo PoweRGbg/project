@@ -45,7 +45,7 @@ export default function RegisterUser(props){
                 <div className="col-12">
                   <form onSubmit={(e) => onSubmit(e)} className="tm-login-form">
                     <div className="form-group">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">Username</label>
                       <input
                         name="email"
                         type="text"
