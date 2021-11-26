@@ -29,7 +29,7 @@ export default function NotificationsList() {
         <h2 className="tm-block-title">Notification List</h2>
         <div className="tm-notification-items">
           {notifications.length > 0 && notifications.map(notification =>
-            <NotificationsListItem key={notification.id}
+            <NotificationsListItem key={notification._id}
                           notification={notification}
             />)}
 

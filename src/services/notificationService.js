@@ -1,4 +1,3 @@
-import uniqid from 'uniqid';
 import { url } from '../config/configuration.js'
 
 export const addNotification = async (notification) => {
@@ -12,7 +11,6 @@ export const addNotification = async (notification) => {
     //     }
     // ]
     try {
-        notification.id = uniqid();
         let response = await fetch(url + "/notifications", {
             method: 'POST',
             headers: {
