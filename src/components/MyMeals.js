@@ -111,7 +111,7 @@ export default function MyMeals(props) {
                           ? meals.map((meal) => (
                               <MyMealsRow meal={meal} key={meal._id} />
                             ))
-                          : ""}
+                          : <tr><td>You don't have any meals entered!</td></tr>}
                       </tbody>
                     </table>
                     <button

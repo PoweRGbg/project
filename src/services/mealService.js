@@ -13,7 +13,6 @@ export const addMeal = async (meal) => {
             body: JSON.stringify(meal)
         });
         let result = await response.json();
-        console.log(`Response after create: `+result);
         createNotification(result);
         return result;
     } catch (error) {

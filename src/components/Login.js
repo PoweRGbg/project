@@ -1,5 +1,5 @@
 import * as api from "../api/data.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from 'react-router-dom';
 window.api = api;
 
