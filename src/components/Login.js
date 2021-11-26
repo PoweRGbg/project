@@ -1,9 +1,11 @@
 import * as api from "../api/data.js";
+import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 window.api = api;
 
 export default function Login() {
   let historyHook = useHistory();
+  let [error, setError] = useState();
 
   
 
@@ -17,8 +19,13 @@ export default function Login() {
       return alert("All fields are required!");
     }
 
+    try {
+      await window.api.login(email, password);
+      
+    } catch (e) {
+      setError(e);
+    }
 
-    await window.api.login(email, password);
     if(sessionStorage.getItem('email')){
         historyHook.push(`/`);
         console.log(`User ${email} logged in!`);
@@ -33,7 +40,10 @@ export default function Login() {
           <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
             <div className="row">
               <div className="col-12 text-center">
-                <h2 className="tm-block-title mb-4">Welcome to Meals, Login</h2>
+                {error
+                ? <h2 className="tm-block-title mb-4" style={{color: "red"}}>{error}</h2>
+                : <h2 className="tm-block-title mb-4">Welcome to Meals, Login</h2>
+                }
               </div>
             </div>
             <div className="row mt-2">

@@ -125,7 +125,8 @@ export default function createApi(beginRequest, endRequest) {
     
                 return result;
             } catch (error) {
-                console.error(error.message);         
+                console.error(error.message); 
+                throw(error.message);        
             }
         },
 
