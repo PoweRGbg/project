@@ -25,7 +25,6 @@ export default function CommentsCard({ meal }) {
     newComment.recipe = meal._id;
     newComment.recipeName = meal.name;
     newComment.date = Date.now();
-    console.log(`new comment is: `+JSON.stringify(newComment));
     if (sessionStorage.getItem("email")) {
       addComment(newComment);
       getComments(meal._id).then((result) => {
