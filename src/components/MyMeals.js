@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { getNotifications } from "../services/notificationService";
 
-
 import {
   getMealsByOwner,
   getMealById,
@@ -23,9 +22,9 @@ export default function MyMeals(props) {
       });
     getNotifications().then((result) => {
       if (result) {
-        result = result.sort((a, b) => b.date - a.date);// show newest first
-        result = result.slice(0,5); // show only the first 5 notifications
-        setNotifications(result); 
+        result = result.sort((a, b) => b.date - a.date); // show newest first
+        result = result.slice(0, 5); // show only the first 5 notifications
+        setNotifications(result);
       }
     });
   }, []);
@@ -107,19 +106,27 @@ export default function MyMeals(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        {meals.length > 0
-                          ? meals.map((meal) => (
-                              <MyMealsRow meal={meal} key={meal._id} />
-                            ))
-                          : <tr><td>You don't have any meals entered!</td></tr>}
+                        {meals.length > 0 ? (
+                          meals.map((meal) => (
+                            <MyMealsRow meal={meal} key={meal._id} />
+                          ))
+                        ) : (
+                          <tr>
+                            <td>You don't have any meals entered!</td>
+                          </tr>
+                        )}
                       </tbody>
                     </table>
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-block text-uppercase"
-                    >
-                      Delete selected products
-                    </button>
+                    {meals.length > 0 ? (
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-block text-uppercase"
+                      >
+                        Delete selected products
+                      </button>
+                    ) : (
+                      <div></div>
+                    )}
                   </form>
                 </div>
                 <a
@@ -134,7 +141,7 @@ export default function MyMeals(props) {
         </div>
         <div className="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
           <div className="tm-bg-primary-dark tm-block tm-block-product-categories">
-            <h2 className="tm-block-title">Notifications</h2>
+            <h2 className="tm-block-title">Last 5 notifications</h2>
             <div className="tm-product-table-container">
               <table className="table tm-table-small tm-product-table">
                 <tbody>
