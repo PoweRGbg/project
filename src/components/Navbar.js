@@ -88,15 +88,23 @@ export default function Navbar() {
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   {logged ? (
                     <Link
+                    className="dropdown-item"
+                    to="/meals/mymeals"
+                    onClick={clickHandler}
+                  >
+                    My meals
+                  </Link>
+                    
+                  ) : (
+                    ""
+                  )}
+                  <Link
                       className="dropdown-item"
                       to="/addMeal"
                       onClick={clickHandler}
                     >
                       Add new meal
                     </Link>
-                  ) : (
-                    ""
-                  )}
                   <Link
                     className="dropdown-item"
                     to="/notifications"
@@ -104,13 +112,7 @@ export default function Navbar() {
                   >
                     Latest actions
                   </Link>
-                  <Link
-                    className="dropdown-item"
-                    to="/meals/mymeals"
-                    onClick={clickHandler}
-                  >
-                    My meals
-                  </Link>
+                  
                 </div>
               </li>
             ) : (
