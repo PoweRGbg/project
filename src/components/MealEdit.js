@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMealById, editMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
-import "./MealDetails.css";
+import "../css/MealDetails.css";
 
 export default function MealEdit({ match }) {
   let [meal, setMeal] = useState([]);

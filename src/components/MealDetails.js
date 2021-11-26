@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { getMealById, deleteMeal } from "../services/mealService";
 import CommentsCard from "./CommentsCard";
 import { useHistory } from "react-router-dom";
-
+import "../css/fontawesome.min.css";
+import "../css/bootstrap.min.css";
+import "../css/templatemo-style.css";
 export default function MealDetails({ match }) {
   let [meal, setMeal] = useState([]);
   let historyHook = useHistory();
