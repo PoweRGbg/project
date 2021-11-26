@@ -23,7 +23,9 @@ export default function MyMeals(props) {
       });
     getNotifications().then((result) => {
       if (result) {
-        setNotifications(result.sort((a, b) => b.date - a.date)); // show newest first
+        result = result.sort((a, b) => b.date - a.date);// show newest first
+        result = result.slice(0,5); // show only the first 5 notifications
+        setNotifications(result); 
       }
     });
   }, []);
