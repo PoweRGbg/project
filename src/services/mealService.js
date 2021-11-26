@@ -13,7 +13,8 @@ export const addMeal = async (meal) => {
             body: JSON.stringify(meal)
         });
         let result = await response.json();
-        createNotification(meal);
+        console.log(`Response after create: `+result);
+        createNotification(result);
         return result;
     } catch (error) {
         console.error(error)
@@ -37,8 +38,9 @@ export const editMeal = async (meal) => {
             who: sessionStorage.getItem('email'),
             dateString: Date.now().toString(),
             date: Date.now(),
-            text: `Editted ${meal.name}`,
-            recipe: meal.id,
+            text: `Editted `,
+            recipe: meal._id,
+            recipeName: meal.name,
         }
         addNotification(notification);
         return result;
@@ -65,8 +67,9 @@ export const deleteMeal = async (meal) => {
             who: sessionStorage.getItem('email'),
             dateString: Date.now().toString(),
             date: Date.now(),
-            text: `Deleted ${meal.name}`,
-            recipe: meal.id,
+            text: `Deleted `,
+            recipe: meal._id,
+            recipeName: meal.name,
         }
         addNotification(notification);
         return result;
@@ -117,8 +120,9 @@ export function createNotification(meal) {
         who: sessionStorage.getItem('email'),
         dateString: Date.now().toString(),
         date: Date.now(),
-        text: `Added ${meal.name}`,
-        recipe: meal.id,
+        text: `Added `,
+        recipe: meal._id,
+        recipeName: meal.name,
     }
     addNotification(notification);
 }

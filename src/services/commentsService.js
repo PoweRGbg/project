@@ -29,7 +29,7 @@ export async function getComments(mealId) {
             method: 'GET'
         });
         let result = await comments.json();
-        let arrayOfResults = Object.values(result).filter(x=> x.meal === mealId);
+        let arrayOfResults = Object.values(result).filter(x=> x.recipe === mealId);
         return arrayOfResults;
 
     } catch (error) {
@@ -44,8 +44,9 @@ export function createNotification(comment) {
         who: sessionStorage.getItem('email'),
         dateString: Date.now().toString(),
         date: Date.now(),
-        text: `Commented  `,
-        recipe: comment.meal,
+        text: `Commented `,
+        recipe: comment.recipe,
+        recipeName: comment.recipeName,
     }
     addNotification(notification);
 }

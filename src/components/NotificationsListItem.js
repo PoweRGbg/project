@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function NotificationsListItem({ notification }) {
   let minAgo = Math.floor(((Date.now() - notification.date) / 1000) / 60);
   let hoursAgo;
@@ -10,12 +12,13 @@ export default function NotificationsListItem({ notification }) {
     daysAgo = Math.floor(hoursAgo / 24);
     hoursAgo = hoursAgo % 24;
   }
+  // console.log(`From row: `+JSON.stringify(notification));
   return (
     <div className="media tm-notification-item">
       <div className="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar" className="rounded-circle img-small" /></div>
       <div className="media-body">
-        <p className="mb-2"><b>{notification?.who}</b> {notification.text} <a href="/"
-          className="tm-notification-link">{notification.recipeName}</a></p>
+        <p className="mb-2"><b>{notification?.who}</b> {notification.text} <Link to={`/meals/${notification.recipe}`}
+          className="tm-notification-link">{notification.recipeName}</Link></p>
         <span className="tm-small tm-text-color-secondary">{daysAgo? daysAgo+" d ": ""}{hoursAgo? hoursAgo+" h ": ""}{minAgo} m ago.</span>
       </div>
     </div>

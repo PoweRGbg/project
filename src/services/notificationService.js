@@ -8,6 +8,7 @@ export const addNotification = async (notification) => {
     //         date: Date.now(),
     //         text: "Addied ",
     //         recipe: "recipeId",
+    //         recipeName: "recipe.name",
     //     }
     // ]
     try {

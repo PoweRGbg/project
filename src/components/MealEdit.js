@@ -28,7 +28,6 @@ export default function MealEdit({ match }) {
       imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
-    console.log(JSON.stringify(newRecipe));
     editMeal(newRecipe);
     historyHook.push("/allmeals");
   }

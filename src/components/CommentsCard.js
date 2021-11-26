@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import { getComments } from "../services/commentsService.js";
 import CommentsTableRow from "./CommentTableRow.js";
 import { addComment } from "../services/commentsService.js";
+import { useHistory } from "react-router-dom";
+
 
 export default function CommentsCard({ meal }) {
   let [comments, setComments] = useState([]);
   let newComment = {};
+  let historyHook = useHistory();
+
 
   useEffect(() => {
     getComments(meal._id).then((result) => {
@@ -18,14 +22,16 @@ export default function CommentsCard({ meal }) {
     let formData = new FormData(e.target);
     newComment.text = formData.get("text");
     newComment.user = sessionStorage.getItem("email");
-    newComment.meal = meal._id;
+    newComment.recipe = meal._id;
+    newComment.recipeName = meal.name;
     newComment.date = Date.now();
+    console.log(`new comment is: `+JSON.stringify(newComment));
     if (sessionStorage.getItem("email")) {
       addComment(newComment);
-      // historyHook.push(`/meal/${meal._id}`);
       getComments(meal._id).then((result) => {
         if (result) setComments(result);
       });
+      historyHook.push(`/meals/${meal._id}`);
     }
   }
 
