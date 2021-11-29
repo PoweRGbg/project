@@ -2,31 +2,31 @@ import { databaseUrl as url } from '../config/configuration.js'
 import { addNotification } from './notificationService.js'
 import * as data from "../api/data.js";
 
-export const addMeal = async (meal) => {
+export const addMeal = async (meal, user) => {
     try {
         let response = await fetch(url + "data/meals", {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
-                'X-Authorization': sessionStorage.getItem('userToken')
+                'X-Authorization': user.accessToken
             },
             body: JSON.stringify(meal)
         });
         let result = await response.json();
-        createNotification(result);
+        createNotification(result, user);
         return result;
     } catch (error) {
         console.error(error)
     };
 
 }
-export const editMeal = async (meal) => {
+export const editMeal = async (meal, user) => {
     try {
         let response = await fetch(url + "data/meals/"+meal._id, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
-                'X-Authorization': sessionStorage.getItem('userToken')
+                'X-Authorization': user.accessToken
             },
             body: JSON.stringify(meal)
         });
@@ -34,7 +34,7 @@ export const editMeal = async (meal) => {
         // Notification for Edit
         let notification =
         {
-            who: sessionStorage.getItem('email'),
+            who: user.email,
             dateString: Date.now().toString(),
             date: Date.now(),
             text: `Editted `,
@@ -49,13 +49,13 @@ export const editMeal = async (meal) => {
 
 }
 
-export const deleteMeal = async (meal) => {
+export const deleteMeal = async (meal, user) => {
     try {
         let response = await fetch(url + "data/meals/"+meal._id, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
-                'X-Authorization': sessionStorage.getItem('userToken')
+                'X-Authorization': user.accessToken
             },
             body: JSON.stringify(meal)
         });
@@ -63,7 +63,7 @@ export const deleteMeal = async (meal) => {
         // Notification for Edit
         let notification =
         {
-            who: sessionStorage.getItem('email'),
+            who: user.email,
             dateString: Date.now().toString(),
             date: Date.now(),
             text: `Deleted `,
@@ -113,10 +113,10 @@ export async function getMealsByOwner(ownerId) {
     }
 }
 
-export function createNotification(meal) {
+export function createNotification(meal, user) {
     let notification =
     {
-        who: sessionStorage.getItem('email'),
+        who: user.email,
         dateString: Date.now().toString(),
         date: Date.now(),
         text: `Added `,

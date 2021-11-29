@@ -1,12 +1,14 @@
+import AuthContext from "../contexts/AuthContext";
 import * as api from "../api/data.js";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 window.api = api;
 
 export default function RegisterUser(props) {
   let historyHook = useHistory();
   let [error, setError] = useState();
+  let {user, login} = useContext(AuthContext);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -24,18 +26,14 @@ export default function RegisterUser(props) {
     }
 
     try {
-      await window.api.register(email, password);
-      
+      let result = await window.api.register(email, password);
+      login(result);
+      console.log(`User ${result.email} logged in!`);
+      historyHook.push(`/`);
     } catch (e) {
       setError(e);
     }
 
-    if (sessionStorage.getItem("email")) {
-      historyHook.push(`/`);
-      console.log(`User ${email} logged in!`);
-    }
-    console.log(`User ${email} registered and logged in!`);
-    // ctx.page.redirect('/');
   }
 
   return (

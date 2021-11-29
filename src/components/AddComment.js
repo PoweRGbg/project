@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import AuthContext from '../contexts/AuthContext';
+import { useEffect, useContext } from 'react';
 import { addComment } from '../services/commentsService';
 import { useHistory } from 'react-router-dom';
 
 export default function AddComment({meal}) {
     let historyHook = useHistory();
     let newComment = {};
+    const {user} = useContext(AuthContext)
 
     useEffect(() => {
         console.log(`Meal id got is ${meal._id}`);
@@ -15,13 +17,14 @@ export default function AddComment({meal}) {
         e.preventDefault();
         let formData = new FormData(e.target)
         newComment.text = formData.text;
-        newComment.user = sessionStorage.getItem('email');
+        newComment.user = user.email;
         newComment.meal = meal._id;
         newComment.date = Date.now(); 
-        if (true) {
-            addComment(newComment);
+        if (user.email) {
+            addComment(newComment, user);
             historyHook.push(`/meal/${meal._id}`);
         }
+        
     }
 
     return (

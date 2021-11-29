@@ -1,15 +1,18 @@
+import AuthContext from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { useState , useEffect} from "react";
+import { useState , useEffect, useContext} from "react";
 
 export default function Navbar() {
   let historyHook = useHistory();
   let [activeButton, setActive] = useState("");
+  let {user, logout} = useContext(AuthContext);
 
   const logged =
-    sessionStorage.getItem("email") || sessionStorage.getItem("userId");
+    user.email || user.userId;
   //catch logout
   const logoutHandler = async function (event) {
     await window.api.logout();
+    logout();
     setActive("");
     historyHook.push(`/`);
   };
@@ -62,7 +65,7 @@ export default function Navbar() {
                 <span className="sr-only">(current)</span>
               </Link>
             </li>
-            {sessionStorage.getItem("email") ? (
+            {user.email ? (
               <li className="nav-item dropdown">
                 <Link
                   className={
@@ -173,7 +176,7 @@ export default function Navbar() {
           {logged ? (
             <li className="nav-item">
               <Link className="nav-link d-block" to="/" onClick={logoutHandler}>
-                {sessionStorage.getItem("email")}, <b>Logout</b>
+                {user.email}, <b>Logout</b>
               </Link>
             </li>
           ) : (

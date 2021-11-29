@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import AuthContext from "../contexts/AuthContext";
+import { useEffect, useState, useContext } from "react";
 import { getMealById, editMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
 import "../css/MealDetails.css";
@@ -6,6 +7,7 @@ import "../css/MealDetails.css";
 export default function MealEdit({ match }) {
   let [meal, setMeal] = useState([]);
   let historyHook = useHistory();
+  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,10 +30,10 @@ export default function MealEdit({ match }) {
       imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
-    editMeal(newRecipe);
+    editMeal(newRecipe, user);
     historyHook.push("/allmeals");
   }
-  return meal._ownerId === sessionStorage.getItem("userId") ? (
+  return meal._ownerId === user._id ? (
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">

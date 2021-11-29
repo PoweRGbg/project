@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import AuthContext from "../contexts/AuthContext";
+import { useEffect, useState, useContext } from "react";
 import { getMealById, deleteMeal } from "../services/mealService";
 import CommentsCard from "./CommentsCard";
 import { useHistory } from "react-router-dom";
 import "../css/fontawesome.min.css";
 import "../css/bootstrap.min.css";
 import "../css/templatemo-style.css";
+
 export default function MealDetails({ match }) {
   let [meal, setMeal] = useState([]);
+  const {user} = useContext(AuthContext);
   let historyHook = useHistory();
 
   useEffect(() => {
@@ -19,7 +22,7 @@ export default function MealDetails({ match }) {
         setMeal(result);
       })
       .then(window.scrollTo(0, 0));
-  }, [match.params.mealId]);
+  }, [match.params.mealId, user]);
 
   function editButtonHandler(e) {
     e.preventDefault();
@@ -27,7 +30,7 @@ export default function MealDetails({ match }) {
   }
   function deleteButtonHandler(e) {
     e.preventDefault();
-    deleteMeal(meal);
+    deleteMeal(meal, user);
     historyHook.push(`/allmeals`);
   }
 
@@ -87,7 +90,7 @@ export default function MealDetails({ match }) {
 
                 <div className="row">
                   <div className="custom-file mt-3 mb-3">
-                    {meal._ownerId === sessionStorage.getItem("userId") ? (
+                    {meal._ownerId === user._id ? (
                       <div className="col-6">
                         <button
                           type="submit"

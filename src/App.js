@@ -10,17 +10,29 @@ import RegisterUser from './components/RegisterUser';
 import Login from './components/Login';
 import MealEdit from './components/MealEdit';
 import MyMeals from './components/MyMeals';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+
+import AuthContext from './contexts/AuthContext.js';
 
 function App() {
   let historyHook = useLocation();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     console.log('APP we are at '+ historyHook.pathname);
   }, [historyHook]);
+
+
+  const login = (loggedUser) => {
+    setUser(loggedUser);
+  };
+
+  const logout = () => {
+    setUser({});
+  };
   
   return (
-    <div className="" id="home">
+    <AuthContext.Provider value={{user:user, login, logout}}>
       <Navbar />
       <Switch>
         <Route path="/" exact component={Content} />
@@ -34,7 +46,7 @@ function App() {
         <Route path="/login" component={Login} />
       </Switch>
       <Footer />
-    </div>
+    </AuthContext.Provider>
   );
 }
 

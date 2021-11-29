@@ -1,13 +1,13 @@
+import AuthContext from "../contexts/AuthContext";
 import * as api from "../api/data.js";
-import { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 window.api = api;
 
 export default function Login() {
   let historyHook = useHistory();
   let [error, setError] = useState();
-
-  
+  let { user, login } = useContext(AuthContext);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -20,17 +20,19 @@ export default function Login() {
     }
 
     try {
-      await window.api.login(email, password);
-      
+      let result = await window.api.login(email, password);
+      login(result);
+      console.log(`User ${user.email} logged in!`);
+      if (result.email) {
+        historyHook.push(`/`);
+      }
     } catch (e) {
       setError(e);
     }
 
-    if(sessionStorage.getItem('email')){
-        historyHook.push(`/`);
-        console.log(`User ${email} logged in!`);
+    if (user.email) {
+      console.log(`After logging in ${JSON.stringify(user)}`);
     }
-
   }
 
   return (
@@ -40,15 +42,24 @@ export default function Login() {
           <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
             <div className="row">
               <div className="col-12 text-center">
-                {error
-                ? <h2 className="tm-block-title mb-4" style={{color: "red"}}>{error}</h2>
-                : <h2 className="tm-block-title mb-4">Welcome to Meals, Login</h2>
-                }
+                {error ? (
+                  <h2 className="tm-block-title mb-4" style={{ color: "red" }}>
+                    {error}
+                  </h2>
+                ) : (
+                  <h2 className="tm-block-title mb-4">
+                    Welcome to Meals, Login
+                  </h2>
+                )}
               </div>
             </div>
             <div className="row mt-2">
               <div className="col-12">
-                <form  onSubmit={(e) => onSubmit(e)}  method="post" className="tm-login-form">
+                <form
+                  onSubmit={(e) => onSubmit(e)}
+                  method="post"
+                  className="tm-login-form"
+                >
                   <div className="form-group">
                     <label htmlFor="email">Username</label>
                     <input

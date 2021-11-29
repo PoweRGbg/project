@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import AuthContext from "../contexts/AuthContext";
+import { useEffect, useState, useContext } from "react";
 import { addMeal, getMeals } from "../services/mealService";
 import { useHistory } from "react-router-dom";
 
 export default function AddMealForm({ history }) {
   let historyHook = useHistory();
   let [meals, setMeals] = useState([]);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getMeals().then((result) => {
@@ -23,7 +25,7 @@ export default function AddMealForm({ history }) {
       imageURL: formData.get("imageUrl"),
       recipe: formData.get("preparation"),
     };
-      addMeal(newRecipe);
+      addMeal(newRecipe, user);
       console.log(`added ${newRecipe.name} to database`);
       meals.push(newRecipe);
       historyHook.push("/allmeals");

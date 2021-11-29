@@ -1,12 +1,12 @@
 import { databaseUrl } from "../config/configuration";
 
-
 export default function createApi(beginRequest, endRequest) {
     const endpoints = {
         REGISTER: 'users/register',
         LOGIN: 'users/login',
         LOGOUT: 'users/logout'
     };
+
 
     return {
         beginRequest() {

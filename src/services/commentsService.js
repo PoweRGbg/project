@@ -1,7 +1,7 @@
 import { url } from '../config/configuration.js'
 import { addNotification } from './notificationService.js'
 
-export const addComment = async (comment) => {
+export const addComment = async (comment, user) => {
     try {
         let response = await fetch(url + "/comments", {
             method: 'POST',
@@ -11,7 +11,7 @@ export const addComment = async (comment) => {
             body: JSON.stringify(comment)
         });
         let result = await response.json();
-        createNotification(comment);
+        createNotification(comment, user);
         return result;
     } catch (error) {
         console.error(error)
@@ -38,10 +38,10 @@ export async function getComments(mealId) {
 }
 
 
-export function createNotification(comment) {
+export function createNotification(comment, user) {
     let notification =
     {
-        who: sessionStorage.getItem('email'),
+        who: user.email,
         dateString: Date.now().toString(),
         date: Date.now(),
         text: `Commented `,

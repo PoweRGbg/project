@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import AuthContext from "../contexts/AuthContext";
+import { useState, useEffect, useContext } from "react";
 import { getNotifications } from "../services/notificationService";
 
 import {
@@ -10,14 +11,15 @@ import MyMealsRow from "./MyMealsRow";
 import { MyMealsNotificationsTableRow } from "./MyMealsNotificationsTableRow";
 
 export default function MyMeals(props) {
+  let { user } = useContext(AuthContext);
   let [meals, setMeals] = useState([]);
   let [notifications, setNotifications] = useState([]);
   let [note, setNote] = useState("");
   let [toDelete, setToDelete] = useState([]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("userId"))
-      getMealsByOwner(sessionStorage.getItem("userId")).then((result) => {
+    if (user.email)
+      getMealsByOwner(user._id).then((result) => {
         if (result) setMeals(result);
       });
     getNotifications().then((result) => {
@@ -27,7 +29,7 @@ export default function MyMeals(props) {
         setNotifications(result);
       }
     });
-  }, []);
+  }, [user]);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -50,10 +52,10 @@ export default function MyMeals(props) {
     setNote("");
     for (let index = 0; index < toDelete.length; index++) {
       const element = toDelete[index];
-      await deleteMeal(element);
+      await deleteMeal(element, user);
     }
-    if (sessionStorage.getItem("userId"))
-      getMealsByOwner(sessionStorage.getItem("userId")).then((result) => {
+    if (user.email)
+      getMealsByOwner(user._id).then((result) => {
         if (result) setMeals(result);
       });
   }
@@ -61,7 +63,7 @@ export default function MyMeals(props) {
     setNote("");
   }
 
-  function deleteButtonHandler(e){
+  function deleteButtonHandler(e) {
     console.log(JSON.stringify(e));
   }
 
@@ -112,7 +114,11 @@ export default function MyMeals(props) {
                       <tbody>
                         {meals.length > 0 ? (
                           meals.map((meal) => (
-                            <MyMealsRow meal={meal} key={meal._id} onDeleteClick={deleteButtonHandler} />
+                            <MyMealsRow
+                              meal={meal}
+                              key={meal._id}
+                              onDeleteClick={deleteButtonHandler}
+                            />
                           ))
                         ) : (
                           <tr>
@@ -154,7 +160,6 @@ export default function MyMeals(props) {
                       <MyMealsNotificationsTableRow
                         key={notification._id}
                         notification={notification}
-                        
                       />
                     ))}
                 </tbody>
