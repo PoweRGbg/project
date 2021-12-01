@@ -1,10 +1,11 @@
 import AuthContext from '../contexts/AuthContext';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { addComment } from '../services/commentsService';
 import { useHistory } from 'react-router-dom';
 
 export default function AddComment({meal}) {
     let historyHook = useHistory();
+    const [commentText, setCommentText] = useState('');
     let newComment = {};
     const {user} = useContext(AuthContext)
 
@@ -12,11 +13,15 @@ export default function AddComment({meal}) {
         console.log(`Meal id got is ${meal._id}`);
     }, [meal._id]);
 
+    function commentChangeHandler(e){
+        e.preventDefault();
+        setCommentText(e.target.value)
+        console.log('text  '+ e.target.value);
+    }
 
     function onClickHandler(e) {
         e.preventDefault();
-        let formData = new FormData(e.target)
-        newComment.text = formData.text;
+        newComment.text = commentText;
         newComment.user = user.email;
         newComment.meal = meal._id;
         newComment.date = Date.now(); 
@@ -43,12 +48,14 @@ export default function AddComment({meal}) {
                                             type="text"
                                             className="form-control validate tm-small"
                                             id="text"
+                                            value=""
                                             required
                                             style={{
                                                 'backgroundColor': '#54657d',
                                                 color: '#fff',
                                                 border: 0
                                             }}
+                                            onChange={commentChangeHandler}
                                         ></textarea>
                                         <button
                                             type="submit"

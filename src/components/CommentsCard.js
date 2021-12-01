@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 
 export default function CommentsCard({ meal }) {
   let [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState('');
   const {user} = useContext(AuthContext)
   let newComment = {};
   let historyHook = useHistory();
@@ -19,19 +20,25 @@ export default function CommentsCard({ meal }) {
     });
   }, [meal]);
 
+  function commentChangeHandler(e){
+    e.preventDefault();
+    setCommentText(e.target.value)
+}
+
+
   function onClickHandler(e) {
     e.preventDefault();
-    let formData = new FormData(e.target);
-    newComment.text = formData.get("text");
+    newComment.text = commentText;
     newComment.user = user.email;
     newComment.recipe = meal._id;
     newComment.recipeName = meal.name;
     newComment.date = Date.now();
-    if (user.email) {
+    if (user.email && commentText) {
       addComment(newComment, user);
       getComments(meal._id).then((result) => {
         if (result) setComments(result);
       });
+      setCommentText("");
       historyHook.push(`/meals/${meal._id}`);
     }
   }
@@ -58,6 +65,8 @@ export default function CommentsCard({ meal }) {
                           color: "#fff",
                           border: 0,
                         }}
+                        value={commentText}
+                        onChange={commentChangeHandler}
                       ></textarea>
                       <button
                         type="submit"
