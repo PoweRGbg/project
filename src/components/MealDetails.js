@@ -9,7 +9,7 @@ import "../css/templatemo-style.css";
 
 export default function MealDetails({ match }) {
   let [meal, setMeal] = useState([]);
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   let historyHook = useHistory();
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export default function MealDetails({ match }) {
     e.preventDefault();
     historyHook.push(`/edit/${meal._id}`);
   }
+
   function deleteButtonHandler(e) {
     e.preventDefault();
     deleteMeal(meal, user);
@@ -43,12 +44,11 @@ export default function MealDetails({ match }) {
               <div className="col-12"></div>
             </div>
             <div className="row tm-edit-product-row">
-        
               <div className="col-xl-6 col-lg-6 col-md-12">
                 <div className="form-group mb-3">
-              <center>ERROR FETCHING MEAL!</center>
+                  <center>ERROR FETCHING MEAL!</center>
                 </div>
-                  </div>
+              </div>
             </div>
           </div>
         </div>

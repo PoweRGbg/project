@@ -40,8 +40,14 @@ export default function CommentsCard({ meal }) {
       });
       setCommentText("");
       historyHook.push(`/meals/${meal._id}`);
+      getComments(meal._id).then((result) => {
+        if (result) setComments(result);
+      });
+      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
   }
+
+
 
   return (
     <div className="container tm-mt-big tm-mb-big">
