@@ -1,17 +1,15 @@
 import AuthContext from "../contexts/AuthContext";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { getComments } from "../services/commentsService.js";
 import CommentsTableRow from "./CommentTableRow.js";
 import { addComment } from "../services/commentsService.js";
-import { useHistory } from "react-router-dom";
-
 
 export default function CommentsCard({ meal }) {
   let [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const {user} = useContext(AuthContext)
   let newComment = {};
-  let historyHook = useHistory();
+  const commentsDiv = useRef(null);
 
 
   useEffect(() => {
@@ -39,15 +37,14 @@ export default function CommentsCard({ meal }) {
         if (result) setComments(result);
       });
       setCommentText("");
-      historyHook.push(`/meals/${meal._id}`);
+      executeScroll(); 
       getComments(meal._id).then((result) => {
         if (result) setComments(result);
       });
-      window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
+      // window.scrollTo(0, document.body.scrollHeight || document.documentElement.scrollHeight);
     }
   }
-
-
+  const executeScroll = () => commentsDiv.current.scrollIntoView();
 
   return (
     <div className="container tm-mt-big tm-mb-big">
@@ -91,7 +88,7 @@ export default function CommentsCard({ meal }) {
         ""
       )}
 
-      <div className="container tm-mt-big tm-mb-big">
+      <div className="container tm-mt-big tm-mb-big" ref={commentsDiv}>
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
           <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
             <label className="tm-block-list ">Comments about {meal.name}</label>
