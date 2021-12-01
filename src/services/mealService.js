@@ -13,6 +13,7 @@ export const addMeal = async (meal, user) => {
             body: JSON.stringify(meal)
         });
         let result = await response.json();
+        console.log(result);
         createNotification(result, user);
         return result;
     } catch (error) {

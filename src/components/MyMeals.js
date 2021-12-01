@@ -9,6 +9,7 @@ import {
 } from "../services/mealService";
 import MyMealsRow from "./MyMealsRow";
 import { MyMealsNotificationsTableRow } from "./MyMealsNotificationsTableRow";
+import { Link } from "react-router-dom";
 
 export default function MyMeals(props) {
   let { user } = useContext(AuthContext);
@@ -141,12 +142,12 @@ export default function MyMeals(props) {
                     )}
                   </form>
                 </div>
-                <a
-                  href="/addMeal"
+                <Link
+                  to="/addMeal"
                   className="btn btn-primary btn-block text-uppercase mb-3"
                 >
                   Add new recipe
-                </a>
+                </Link>
               </div>
             )}
           </div>

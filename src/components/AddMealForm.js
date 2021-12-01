@@ -1,19 +1,11 @@
 import AuthContext from "../contexts/AuthContext";
-import { useEffect, useState, useContext } from "react";
-import { addMeal, getMeals } from "../services/mealService";
+import {  useContext } from "react";
+import { addMeal,  } from "../services/mealService";
 import { useHistory } from "react-router-dom";
 
-export default function AddMealForm({ history }) {
+export default function AddMealForm() {
   let historyHook = useHistory();
-  let [meals, setMeals] = useState([]);
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    getMeals().then((result) => {
-      if (result) setMeals(result);
-    });
-  }, []);
- 
 
   function onSubmit(e) {
     e.preventDefault();
@@ -22,13 +14,12 @@ export default function AddMealForm({ history }) {
       name: formData.get("name"),
       description: formData.get("description"),
       ingredients: formData.get("ingredients"),
-      imageURL: formData.get("imageUrl"),
+      imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
       addMeal(newRecipe, user);
       console.log(`added ${newRecipe.name} to database`);
-      meals.push(newRecipe);
-      historyHook.push("/allmeals");
+      historyHook.push("/meals/mymeals");
   }
 
   const handleChange = (e) => {
@@ -72,10 +63,10 @@ export default function AddMealForm({ history }) {
       />
       <label className="tm-block-list">Image</label>
       <input
-        name="imageUrl"
+        name="imageURL"
         type="text"
         className="form-control validate"
-        id="imageUrl"
+        id="imageURL"
         required
         onChange={handleChange}
         style={{
