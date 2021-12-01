@@ -24,14 +24,10 @@ export default function Login() {
       login(result);
       console.log(`User ${result.email} logged in!`);
       if (result.email) {
-        historyHook.push(`/`);
+        historyHook.push(`/meals/mymeals`);
       }
     } catch (e) {
       setError(e);
-    }
-
-    if (user.email) {
-      console.log(`After logging in ${JSON.stringify(user)}`);
     }
   }
 
