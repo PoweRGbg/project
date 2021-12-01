@@ -63,8 +63,9 @@ export default function MyMeals(props) {
     setNote("");
   }
 
-  function deleteButtonHandler(e) {
-    console.log(JSON.stringify(e));
+  function garbageBinHandler(garbageMeal) {
+    setToDelete([garbageMeal]);
+    setNote(`Are you sure you want to delete ${garbageMeal.name}?`);
   }
 
   async function getMeals(arrayOfIds) {
@@ -78,7 +79,8 @@ export default function MyMeals(props) {
 
   return (
     <div className="container mt-5">
-      <div className="row tm-content-row">
+      {user.email
+        ?<div className="row tm-content-row">
         <div className="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
           <div className="tm-bg-primary-dark tm-block tm-block-products">
             {note !== "" ? (
@@ -117,7 +119,7 @@ export default function MyMeals(props) {
                             <MyMealsRow
                               meal={meal}
                               key={meal._id}
-                              onDeleteClick={deleteButtonHandler}
+                              remove={garbageBinHandler}
                             />
                           ))
                         ) : (
@@ -168,6 +170,9 @@ export default function MyMeals(props) {
           </div>
         </div>
       </div>
+      : <div className="tm-block-title">Not logged in!</div>
+      }
+      
     </div>
   );
 }
