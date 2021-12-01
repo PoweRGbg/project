@@ -22,7 +22,7 @@ export default function Login() {
     try {
       let result = await window.api.login(email, password);
       login(result);
-      console.log(`User ${user.email} logged in!`);
+      console.log(`User ${result.email} logged in!`);
       if (result.email) {
         historyHook.push(`/`);
       }

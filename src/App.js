@@ -1,4 +1,4 @@
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Content from './components/Content';
@@ -10,17 +10,17 @@ import RegisterUser from './components/RegisterUser';
 import Login from './components/Login';
 import MealEdit from './components/MealEdit';
 import MyMeals from './components/MyMeals';
-import {useEffect, useState} from 'react';
+import { useState} from 'react';
 
 import AuthContext from './contexts/AuthContext.js';
 
 function App() {
-  let historyHook = useLocation();
+  // let historyHook = useLocation();
   const [user, setUser] = useState({});
 
-  useEffect(() => {
-    console.log('APP we are at '+ historyHook.pathname);
-  }, [historyHook]);
+  // useEffect(() => {
+  //   console.log('APP we are at '+ historyHook.pathname);
+  // }, [historyHook]);
 
 
   const login = (loggedUser) => {

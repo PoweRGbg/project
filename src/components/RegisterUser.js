@@ -8,7 +8,7 @@ window.api = api;
 export default function RegisterUser(props) {
   let historyHook = useHistory();
   let [error, setError] = useState();
-  let {user, login} = useContext(AuthContext);
+  let {login} = useContext(AuthContext);
 
   async function onSubmit(event) {
     event.preventDefault();
