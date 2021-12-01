@@ -31,7 +31,7 @@ export default function MealEdit({ match }) {
       recipe: formData.get("preparation"),
     };
     editMeal(newRecipe, user);
-    historyHook.push("/allmeals");
+    historyHook.push("/meals/"+meal._id);
   }
   return meal._ownerId === user._id ? (
     <div className="container tm-mt-big tm-mb-big">
