@@ -1,6 +1,6 @@
 import AuthContext from "../contexts/AuthContext";
-import {  useContext } from "react";
-import { addMeal,  } from "../services/mealService";
+import { useContext } from "react";
+import { addMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
 
 export default function AddMealForm() {
@@ -17,14 +17,15 @@ export default function AddMealForm() {
       imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
-      addMeal(newRecipe, user);
-      console.log(`added ${newRecipe.name} to database`);
-      historyHook.push("/meals/mymeals");
+    addMeal(newRecipe, user)
+    .then(() => {
+        console.log(`added ${newRecipe.name} to database`);
+        historyHook.push("/meals/mymeals");
+    });
   }
 
-  const handleChange = (e) => {
-  };
-  
+  const handleChange = (e) => {};
+
   return (
     <form
       action=""

@@ -42,7 +42,7 @@ export const editMeal = async (meal, user) => {
             recipe: meal._id,
             recipeName: meal.name,
         }
-        addNotification(notification);
+        await addNotification(notification);
         return result;
     } catch (error) {
         console.error(error)
@@ -71,7 +71,7 @@ export const deleteMeal = async (meal, user) => {
             recipe: meal._id,
             recipeName: meal.name,
         }
-        addNotification(notification);
+        await addNotification(notification);
         return result;
     } catch (error) {
         console.error(error)
@@ -114,7 +114,7 @@ export async function getMealsByOwner(ownerId) {
     }
 }
 
-export function createNotification(meal, user) {
+export async function createNotification(meal, user) {
     let notification =
     {
         who: user.email,
@@ -124,5 +124,5 @@ export function createNotification(meal, user) {
         recipe: meal._id,
         recipeName: meal.name,
     }
-    addNotification(notification);
+    await addNotification(notification);
 }

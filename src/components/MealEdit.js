@@ -30,8 +30,10 @@ export default function MealEdit({ match }) {
       imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
-    editMeal(newRecipe, user);
-    historyHook.push("/meals/"+meal._id);
+    editMeal(newRecipe, user)
+    .then(() => {
+        historyHook.push("/meals/"+meal._id);
+    });
   }
   return meal._ownerId === user._id ? (
     <div className="container tm-mt-big tm-mb-big">

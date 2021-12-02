@@ -25,6 +25,9 @@ export default function Navbar() {
   const clickHandler = function (e) {
     if (!e.target.href) {
       e.target.href = "";
+      if(e.currentTarget.href){
+        e.target.href = e.currentTarget.href;
+      }
     }
     let locationSplitted = e.target.href.split("/");
     let currentButton = locationSplitted[locationSplitted.length - 1];
