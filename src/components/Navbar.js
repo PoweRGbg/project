@@ -1,31 +1,38 @@
 import AuthContext from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { useState , useEffect, useContext} from "react";
+import { useState, useEffect, useContext } from "react";
 
 export default function Navbar() {
   let historyHook = useHistory();
   let [activeButton, setActive] = useState("");
-  let {user, logout} = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
-  const logged =
-    user.email || user.userId;
   //catch logout
   const logoutHandler = async function (event) {
     await window.api.logout();
     logout();
     setActive("");
     historyHook.push(`/`);
+    console.log(`Navbar passed through logoutHandler!`);
   };
 
   useEffect(() => {
-    let splitted = historyHook.location.pathname.split("/")[1];
-    setActive(splitted);
+    let splittedPathname = historyHook.location.pathname.split("/")[1];
+    setActive(splittedPathname);
   }, [historyHook.location.pathname]);
-  
+
   const clickHandler = function (e) {
+    if (user.email !== undefined) {
+      if (sessionStorage.getItem("email")) {
+        user.email = sessionStorage.getItem("email");
+      } else {
+        console.log(`No user in navbar!`);
+        logout();
+      }
+    }
     if (!e.target.href) {
       e.target.href = "";
-      if(e.currentTarget.href){
+      if (e.currentTarget.href) {
         e.target.href = e.currentTarget.href;
       }
     }
@@ -92,25 +99,24 @@ export default function Navbar() {
                   </span>
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  {logged ? (
+                  {user.email ? (
                     <Link
-                    className="dropdown-item"
-                    to="/meals/mymeals"
-                    onClick={clickHandler}
-                  >
-                    My meals
-                  </Link>
-                    
+                      className="dropdown-item"
+                      to="/meals/mymeals"
+                      onClick={clickHandler}
+                    >
+                      My meals
+                    </Link>
                   ) : (
                     ""
                   )}
                   <Link
-                      className="dropdown-item"
-                      to="/addMeal"
-                      onClick={clickHandler}
-                    >
-                      Add new meal
-                    </Link>
+                    className="dropdown-item"
+                    to="/addMeal"
+                    onClick={clickHandler}
+                  >
+                    Add new meal
+                  </Link>
                   <Link
                     className="dropdown-item"
                     to="/notifications"
@@ -118,7 +124,6 @@ export default function Navbar() {
                   >
                     Latest actions
                   </Link>
-                  
                 </div>
               </li>
             ) : (
@@ -145,7 +150,7 @@ export default function Navbar() {
                 </span>
               </Link>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {logged ? (
+                {user.email ? (
                   <Link
                     className="dropdown-item"
                     to="/addMeal"
@@ -176,7 +181,7 @@ export default function Navbar() {
           </ul>
         </div>
         <ul className="navbar-nav">
-          {logged ? (
+          {user.email ? (
             <li className="nav-item">
               <Link className="nav-link d-block" to="/" onClick={logoutHandler}>
                 {user.email}, <b>Logout</b>
