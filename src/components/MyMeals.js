@@ -24,7 +24,6 @@ export default function MyMeals(props) {
         if (result) setMeals(result);
       });
     getNotifications().then((result) => {
-      console.log(`Getting notifications!`);
       if (result) {
         result = result.sort((a, b) => b.date - a.date); // show newest first
         result = result.slice(0, 5); // show only the first 5 notifications
@@ -52,15 +51,27 @@ export default function MyMeals(props) {
 
   async function yesClickHandler(e) {
     setNote("");
-    for (let index = 0; index < toDelete.length; index++) {
-      const element = toDelete[index];
-      await deleteMeal(element, user);
-    }
-    if (user.email)
+    if (user.email) {
+      for (let index = 0; index < toDelete.length; index++) {
+        const element = toDelete[index];
+        await deleteMeal(element, user);
+      }
       getMealsByOwner(user._id).then((result) => {
-        if (result) setMeals(result);
+        if (result) {
+          setMeals(result);
+        }
+        getNotifications().then((result) => {
+          console.log(`Getting notifications!`);
+          if (result) {
+            result = result.sort((a, b) => b.date - a.date); // show newest first
+            result = result.slice(0, 5); // show only the first 5 notifications
+            setNotifications(result);
+          }
+        });
       });
+    }
   }
+
   function noClickHandler(e) {
     setNote("");
   }

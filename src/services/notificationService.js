@@ -20,7 +20,6 @@ export const addNotification = async (notification) => {
             body: JSON.stringify(notification)
         });
         let result = await response.json();
-        console.log(`Notification for recipe ${notification.recipeName}`);
         return result;
     } catch (error) {
         console.error(error)
