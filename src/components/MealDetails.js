@@ -35,6 +35,11 @@ export default function MealDetails({ match }) {
     historyHook.push(`/allmeals`);
   }
 
+  function goBackHandler(e) {
+    e.preventDefault();
+    historyHook.goBack();
+  }
+
   return meal.name === undefined ? (
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
@@ -116,6 +121,21 @@ export default function MealDetails({ match }) {
             </div>
           </div>
           <CommentsCard meal={meal} />
+
+
+          <div className="container tm-mt-big tm-mb-big">
+            <div className="row custom-file mt-3 mb-3 col-3">
+              <button
+                type="submit"
+                className="btn btn-primary btn-block text-uppercase col-6"
+                onClick={goBackHandler}
+              >
+                Go back
+              </button>
+            </div>
+          </div>
+
+          
         </div>
       </div>
     </div>
