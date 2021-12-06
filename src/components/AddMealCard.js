@@ -5,19 +5,10 @@ import  AddMealForm  from './AddMealForm';
 function AddMealCard() {
 
     return (
-        <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div className="tm-bg-primary-dark tm-block">
-                <div className="col-12 text-center">
-                    <h2 className="tm-block-title mb-4">Add meal</h2>
-                    <table className="media tm-notification-item ">
-                        <tbody>
-                            <tr>
-                                <td><AddMealForm /></td>
+        <div className="col-12 tm-block-col">
+            <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                                <AddMealForm />
 
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </div>
     );
