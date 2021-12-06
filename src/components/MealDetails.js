@@ -11,6 +11,8 @@ export default function MealDetails({ match }) {
   let [meal, setMeal] = useState([]);
   const { user } = useContext(AuthContext);
   let historyHook = useHistory();
+  let [note, setNote] = useState("");
+  let [toDelete, setToDelete] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,8 +33,19 @@ export default function MealDetails({ match }) {
 
   function deleteButtonHandler(e) {
     e.preventDefault();
+    setToDelete(meal);
+    setNote(`Are you sure you want to remove meal ${meal.name}?`);
+  }
+
+  function yesClickHandler(e) {
+    e.preventDefault();
+
     deleteMeal(meal, user);
-    historyHook.push(`/allmeals`);
+    historyHook.push(`/meals/mymeals`);
+  }
+
+  function noClickHandler(e) {
+    setNote("");
   }
 
   function goBackHandler(e) {
@@ -59,14 +72,34 @@ export default function MealDetails({ match }) {
         </div>
       </div>
     </div>
+  ) : note ? (
+    <div className="container tm-mt-big tm-mb-big">
+      <div className="row">
+        <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <p style={{ color: "white", "text-align": "center" }}>{note}</p>
+            <button
+              className="btn btn-primary btn-block text-uppercase col-4"
+              onClick={yesClickHandler}
+            >
+              Yes
+            </button>
+            <button
+              className="btn btn-primary btn-block text-uppercase col-4"
+              onClick={noClickHandler}
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   ) : (
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
           <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <div className="row">
-              <div className="col-12"></div>
-            </div>
+            <div className="row"></div>
             <div className="row tm-edit-product-row">
               <div className="tm-product-img-edit mx-auto">
                 <img
@@ -122,7 +155,6 @@ export default function MealDetails({ match }) {
           </div>
           <CommentsCard meal={meal} />
 
-
           <div className="container tm-mt-big tm-mb-big">
             <div className="row custom-file mt-3 mb-3 col-3">
               <button
@@ -134,8 +166,6 @@ export default function MealDetails({ match }) {
               </button>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
