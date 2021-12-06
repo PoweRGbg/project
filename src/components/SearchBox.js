@@ -9,40 +9,55 @@ export default function SearchBox() {
 
   return (
     <div
-      class="row tm-content-row"
+      className="row tm-content-row"
       style={{
         height: "30px",
-        "margin-top": "0",
-        "margin-bottom": 0
+        padding: "0px",
+        marginTop: "0",
+        marginBottom: 0,
       }}
     >
-      <div class="tm-block-col tm-col-account-settings">
-        <div class="tm-bg-primary-dark tm-block tm-block-settings">
-          <form action="" class="tm-signup-form row">
-            <div class="form-group col-lg-6">
-              <input
-                id="search"
-                name="search"
-                type="text"
-                class="form-control validate"
-                style={{
-                  height: "35px",
-                }}
-              />
-            </div>
-            <div class="form-group col-lg-6">
-              <button
-                type="submit"
-                class="btn btn-primary btn-block text-uppercase"
-                style={{
-                  height: "30px",
-                  width: "80px",
-                  padding: "0",
-                }}
-              >
-                Search
-              </button>
-            </div>
+      <div
+        className="tm-block-col tm-col-account-settings"
+        style={{
+          padding: "0px",
+          marginTop: "0",
+          marginBottom: 0,
+          width: "250px",
+        }}
+      >
+        <div
+          className="tm-bg-primary-dark tm-block tm-block-settings"
+          style={{
+            padding: "0px",
+            marginTop: "0",
+            marginBottom: 0,
+            width: "500px",
+            display: "inline-block",
+          }}
+        >
+          <form action="" className="tm-signup-form row">
+            <input
+              id="search"
+              name="search"
+              type="text"
+              className="form-control validate"
+              style={{
+                height: "30px",
+                width: "100px",
+              }}
+            />
+            <button
+              type="submit"
+              className="btn btn-primary btn-block text-uppercase"
+              style={{
+                height: "30px",
+                width: "80px",
+                padding: "0",
+              }}
+            >
+              Search
+            </button>
           </form>
         </div>
       </div>
