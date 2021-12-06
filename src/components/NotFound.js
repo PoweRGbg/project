@@ -10,7 +10,7 @@ export default function NotFound() {
             <div className="row">
               <div className="col-12 text-center">
                 
-                  <h2 className="tm-block-title mb-4" style={{ color: "red" }}>
+                  <h2 className="tm-block-title mb-4">
                     Page not found
                   </h2>
                

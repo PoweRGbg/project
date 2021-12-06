@@ -39,7 +39,7 @@ function App() {
         <Route path="/edit/:mealId" component={MealEdit} />
         <Route path="/register" component={RegisterUser} />
         <Route path="/login" component={Login} />
-        <Route path="/404" component={NotFound} />
+        <Route path="*" component={NotFound} />
       </Switch>
       <Footer />
     </AuthContext.Provider>
