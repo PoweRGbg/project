@@ -13,6 +13,7 @@ export default function Navbar() {
     logout();
     setActive("");
     historyHook.push(`/`);
+    console.log(`Navbar passed through logoutHandler!`);
   };
 
   useEffect(() => {

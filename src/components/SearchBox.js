@@ -26,7 +26,7 @@ export default function SearchBox() {
                 type="text"
                 class="form-control validate"
                 style={{
-                  height: "30px",
+                  height: "35px",
                 }}
               />
             </div>
