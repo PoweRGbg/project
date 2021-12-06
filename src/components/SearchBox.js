@@ -13,9 +13,7 @@ export default function SearchBox() {
       style={{
         height: "30px",
         "margin-top": "0",
-        "margin-bottom": 0,
-        "padding": "5px",
-        "padding-right": "0px"
+        "margin-bottom": 0
       }}
     >
       <div class="tm-block-col tm-col-account-settings">
@@ -32,6 +30,7 @@ export default function SearchBox() {
                 }}
               />
             </div>
+            <div class="form-group col-lg-6">
               <button
                 type="submit"
                 class="btn btn-primary btn-block text-uppercase"
@@ -43,6 +42,7 @@ export default function SearchBox() {
               >
                 Search
               </button>
+            </div>
           </form>
         </div>
       </div>
