@@ -1,18 +1,17 @@
-import AuthContext from "../contexts/AuthContext";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { getNotifications } from "../services/notificationService";
-
+import { isAuth } from "../hoc/AuthHoc"
 import {
   getMealsByOwner,
   getMealById,
   deleteMeal,
 } from "../services/mealService";
+
 import MyMealsRow from "./MyMealsRow";
 import { MyMealsNotificationsTableRow } from "./MyMealsNotificationsTableRow";
 import { Link } from "react-router-dom";
 
-export default function MyMeals(props) {
-  let { user } = useContext(AuthContext);
+function MyMeals({user}) {
   let [meals, setMeals] = useState([]);
   let [notifications, setNotifications] = useState([]);
   let [note, setNote] = useState("");
@@ -92,7 +91,6 @@ export default function MyMeals(props) {
 
   return (
     <div className="container mt-5">
-      {user.email ? (
         <div className="row tm-content-row">
           <div className="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
             <div className="tm-bg-primary-dark tm-block tm-block-products">
@@ -183,9 +181,10 @@ export default function MyMeals(props) {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="tm-block-title">Not logged in!</div>
-      )}
     </div>
   );
 }
+
+const EnhancedComponent = isAuth(MyMeals);
+
+export default EnhancedComponent;

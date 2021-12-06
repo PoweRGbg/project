@@ -1,13 +1,13 @@
-import AuthContext from "../contexts/AuthContext";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { getMealById, editMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
+import { isAuth } from "../hoc/AuthHoc"
+
 import "../css/MealDetails.css";
 
-export default function MealEdit({ match }) {
+function MealEdit({ match, user }) {
   let [meal, setMeal] = useState([]);
   let historyHook = useHistory();
-  const {user} = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -129,3 +129,6 @@ export default function MealEdit({ match }) {
     <div>You are not the owner of this resource!</div>
   );
 }
+
+const EditComponent = isAuth(MealEdit);
+export default EditComponent;

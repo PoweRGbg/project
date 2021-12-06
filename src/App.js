@@ -5,7 +5,7 @@ import Content from './components/Content';
 import NotificationsList from './components/NotificationsList';
 import MealsTable from './components/MealsTable';
 import MealDetails from './components/MealDetails';
-import FormWrapper from './components/FormWrapper';
+import AddMealCard from './components/AddMealCard';
 import RegisterUser from './components/RegisterUser';
 import Login from './components/Login';
 import MealEdit from './components/MealEdit';
@@ -37,7 +37,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Content} />
         <Route path="/notifications" exact component={NotificationsList} />
-        <Route path="/addMeal" exact component={FormWrapper} />
+        <Route path="/addMeal" exact component={AddMealCard} />
         <Route path="/allmeals" component={MealsTable} />
         <Route path="/meals/mymeals" component={MyMeals} />
         <Route path="/meals/:mealId" component={MealDetails} />

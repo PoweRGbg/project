@@ -1,6 +1,8 @@
 import '../css/herostyle.css';
-import  AddMealForm  from './AddMealForm'
-export default function AddMealCard(props) {
+import { isAuth } from "../hoc/AuthHoc";
+import  AddMealForm  from './AddMealForm';
+
+function AddMealCard() {
 
     return (
         <div className="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
@@ -23,4 +25,7 @@ export default function AddMealCard(props) {
 
 
 }
+
+const WrappedComponent = isAuth(AddMealCard);
+export default WrappedComponent;
 
