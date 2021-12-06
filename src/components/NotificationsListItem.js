@@ -15,7 +15,7 @@ export default function NotificationsListItem({ notification }) {
   // console.log(`From row: `+JSON.stringify(notification));
   return (
     <div className="media tm-notification-item">
-      <div><i class="fas fa-user"></i></div>
+      <div className="tm-notification-item"><i className="fas fa-user fa-w-14 fa-3x"></i></div>
       <div className="media-body">
         <p className="mb-2"><b>{notification?.who}</b> {notification.text} <Link to={`/meals/${notification.recipe}`}
           className="tm-notification-link">{notification.recipeName}</Link></p>
