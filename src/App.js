@@ -1,27 +1,21 @@
-import { Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Content from './components/Content';
-import NotificationsList from './components/NotificationsList';
-import MealsTable from './components/MealsTable';
-import MealDetails from './components/MealDetails';
-import AddMealCard from './components/AddMealCard';
-import RegisterUser from './components/RegisterUser';
-import Login from './components/Login';
-import MealEdit from './components/MealEdit';
-import MyMeals from './components/MyMeals';
-import { useState} from 'react';
+import { Route, Switch } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Content from "./components/Content";
+import NotificationsList from "./components/NotificationsList";
+import MealsTable from "./components/MealsTable";
+import MealDetails from "./components/MealDetails";
+import AddMealCard from "./components/AddMealCard";
+import RegisterUser from "./components/RegisterUser";
+import Login from "./components/Login";
+import MealEdit from "./components/MealEdit";
+import MyMeals from "./components/MyMeals";
+import { useState } from "react";
 
-import AuthContext from './contexts/AuthContext.js';
+import AuthContext from "./contexts/AuthContext.js";
 
 function App() {
-  // let historyHook = useLocation();
   const [user, setUser] = useState({});
-
-  // useEffect(() => {
-  //   console.log('APP we are at '+ historyHook.pathname);
-  // }, [historyHook]);
-
 
   const login = (loggedUser) => {
     setUser(loggedUser);
@@ -30,9 +24,9 @@ function App() {
   const logout = () => {
     setUser({});
   };
-  
+
   return (
-    <AuthContext.Provider value={{user:user, login, logout}}>
+    <AuthContext.Provider value={{ user: user, login, logout }}>
       <Navbar />
       <Switch>
         <Route path="/" exact component={Content} />
