@@ -36,7 +36,7 @@ export default function SearchBox() {
             display: "inline-block",
           }}
         >
-          <form action="" className="tm-signup-form row">
+          <form action="" className="tm-signup-form row" onSubmit={onClickHandler}>
             <input
               id="search"
               name="search"
