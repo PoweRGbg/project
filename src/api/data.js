@@ -37,3 +37,7 @@ export async function deleteItem(id, item) {
 export async function getMyMeals(userId) {
     return await api.get(endpoints.MEALS + `?where=_ownerId%3D%22${userId}%22`);
 }
+
+export async function searchMeals(text) {
+    return await api.get(endpoints.MEALS + `?where=name%20LIKE%20%22${text}%22`);
+}

@@ -113,6 +113,16 @@ export async function getMealsByOwner(ownerId) {
     }
 }
 
+export async function searchMeals(searchText) {
+    try {
+        let meals = await data.searchMeals(searchText);
+        return meals;
+
+    } catch (error) {
+        console.error('Failed fetching meals for text '+searchText);
+    }
+}
+
 export async function createNotification(meal, user) {
     let notification =
     {

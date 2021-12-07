@@ -1,10 +1,16 @@
-export default function SearchBox() {
-  function onClickHandler(e) {
+import {searchMeals} from "../services/mealService";
+
+export default function SearchBox({searchResult}) {
+
+    function onClickHandler(e) {
     e.preventDefault();
     let formData = new FormData(e.target);
 
     let searchText = formData.get("search");
-    console.log(`Searching for: ${searchText}`);
+    searchMeals(searchText).then(result =>{
+        searchResult(result);
+    });
+
   }
 
   return (

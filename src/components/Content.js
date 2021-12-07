@@ -1,11 +1,22 @@
 import MealsTable from "./MealsTable";
 import AuthContext from "../contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import SearchBox from "./SearchBox";
 // import LoginForm from './LoginForm';
 
 export default function Content() {
+    const [results, setResults] = useState([]);
     const {user} = useContext(AuthContext);
+
+    function searchResult(mealsArray){
+        if(mealsArray.length > 0){
+            setResults(mealsArray);
+        }
+    }
+
+    function clearResult(){
+        setResults([]);
+    }
 
     return (
         <div className="container">
@@ -17,11 +28,11 @@ export default function Content() {
                     }
                 </div>
                 <div className="col">
-                    <SearchBox></SearchBox>
+                    <SearchBox searchResult={searchResult}></SearchBox>
                 </div>
             </div>
             <div className="row tm-content-row">
-                <MealsTable title="Latest meals" />
+                <MealsTable title="Latest meals" results={results} clearResult={clearResult}/>
             </div>
         </div>
     );
