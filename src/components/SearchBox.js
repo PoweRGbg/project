@@ -18,30 +18,13 @@ export default function SearchBox({searchResult}) {
       className="row tm-content-row"
       style={{
         height: "30px",
-        padding: "0px",
-        marginTop: "0",
+        padding: "10px",
+        paddingRight: "30px",
         marginBottom: 0,
+        float: "right"
       }}
     >
-      <div
-        className="tm-block-col tm-col-account-settings"
-        style={{
-          padding: "0px",
-          marginTop: "0",
-          marginBottom: 0,
-          width: "250px",
-        }}
-      >
-        <div
-          className="tm-bg-primary-dark tm-block tm-block-settings"
-          style={{
-            padding: "0px",
-            marginTop: "0",
-            marginBottom: 0,
-            width: "500px",
-            display: "inline-block",
-          }}
-        >
+      
           <form action="" className="tm-signup-form row" onSubmit={onClickHandler}>
             <input
               id="search"
@@ -50,7 +33,7 @@ export default function SearchBox({searchResult}) {
               className="form-control validate"
               style={{
                 height: "30px",
-                width: "100px",
+                width: "250px",
               }}
             />
             <button
@@ -66,7 +49,5 @@ export default function SearchBox({searchResult}) {
             </button>
           </form>
         </div>
-      </div>
-    </div>
   );
 }
