@@ -20,7 +20,10 @@ export default function Content() {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row" style={{
+              paddingBottom: "10px",
+
+            }}>
                 <div className="col">
                     {user.email != null
                     ? <p className="text-white">Welcome back, <b>{user.email}</b></p>

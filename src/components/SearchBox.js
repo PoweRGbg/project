@@ -31,6 +31,7 @@ export default function SearchBox({searchResult}) {
               name="search"
               type="text"
               className="form-control validate"
+              placeholder="Search"
               style={{
                 height: "30px",
                 width: "250px",
