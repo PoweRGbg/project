@@ -15,6 +15,9 @@ function MealEdit({ match, user }) {
       return result;
     }
     fetchData().then((result) => {
+      if(Array.isArray(result.ingredients)){
+        result.ingredients = result.ingredients.join("\n");
+      }
       setMeal(result);
     });
   }, [match.params.mealId]);
