@@ -726,3 +726,12 @@ Hero {
   color: white;
   text-align: right;
   }
+
+li {
+  color: white;
+}
+
+.btn-tiny {
+  height: 30px;
+  padding: 0;
+}

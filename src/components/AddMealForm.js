@@ -1,9 +1,11 @@
 import AuthContext from "../contexts/AuthContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { addMeal } from "../services/mealService";
 import { useHistory } from "react-router-dom";
 
 export default function AddMealForm() {
+  const [ingredients, setIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState("");
   let historyHook = useHistory();
   const { user } = useContext(AuthContext);
 
@@ -13,7 +15,7 @@ export default function AddMealForm() {
     let newRecipe = {
       name: formData.get("name"),
       description: formData.get("description"),
-      ingredients: formData.get("ingredients"),
+      ingredients: ingredients,
       imageURL: formData.get("imageURL"),
       recipe: formData.get("preparation"),
     };
@@ -21,6 +23,31 @@ export default function AddMealForm() {
       console.log(`added ${newRecipe.name} to database`);
       historyHook.push("/meals/mymeals");
     });
+  }
+
+  function handleIngredientChange(e) {
+    e.preventDefault();
+    if (e.target.value.length > -1) {
+      setIngredient(e.target.value);
+    }
+  }
+
+  function addIngredient(e) {
+    e.preventDefault();
+    if (ingredient !== "") {
+      let newIngredients = ingredients;
+      newIngredients.push(ingredient);
+      setIngredients(newIngredients);
+      setIngredient("");
+    }
+    console.log(`Ingredients are ${ingredients}`);
+  }
+
+  function removeIngredient(e, indexOfIngredient) {
+    e.preventDefault();
+    let newIngredients = ingredients;
+    newIngredients.splice(indexOfIngredient, 1);
+    setIngredients([...newIngredients]);
   }
 
   const handleChange = (e) => {};
@@ -77,20 +104,51 @@ export default function AddMealForm() {
               border: 0,
             }}
           />
-          <label className="tm-block-list">Ingredients list</label>
-          <textarea
-            name="ingredients"
+          <label className="tm-block-list">Ingredient</label>
+          <input
+            name="ingredient"
             type="text"
             className="form-control validate"
-            id="ingredients"
-            required
-            onChange={handleChange}
+            id="ingredient"
+            value={ingredient}
+            onChange={handleIngredientChange}
             style={{
               backgroundColor: "#54657d",
               color: "#fff",
               border: 0,
             }}
+            placeholder="Ingredient"
           />
+          <button
+            className="btn btn-primary btn-block text-uppercase"
+            onClick={addIngredient}
+            style={{
+              height: "30px",
+              width: "120px",
+              padding: "0",
+            }}
+          >
+            Add ingredient
+          </button>
+          <label className="tm-block-list">Ingredients list</label>
+          <ul>
+            {ingredients.map((x) => {
+              return (
+                <li key={ingredients.indexOf(x)}>
+                  {x+" "}
+                  <button
+                    className="btn-tiny btn btn-primary"
+                    onClick={(e) => removeIngredient(e, ingredients.indexOf(x))}
+                    style={{
+                        padding:"0"
+                    }}
+                  >
+                    remove
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
           <label className="tm-block-list">Preparation</label>
           <textarea
             name="preparation"
@@ -98,13 +156,13 @@ export default function AddMealForm() {
             className="form-control validate"
             id="preparation"
             required
-            onChange={handleChange}
             style={{
               backgroundColor: "#54657d",
               color: "#fff",
               border: 0,
             }}
           />
+          
           <button
             type="submit"
             className="btn btn-primary btn-block text-uppercase"

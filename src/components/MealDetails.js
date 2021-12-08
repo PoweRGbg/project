@@ -21,6 +21,11 @@ export default function MealDetails({ match }) {
     }
     fetchData()
       .then((result) => {
+        console.log(result);
+        console.log(result.ingredients);
+        if(!Array.isArray(result.ingredients)){
+            result.ingredients = result.ingredients.split("\r");
+        }
         setMeal(result);
       })
       .then(window.scrollTo(0, 0));
@@ -119,7 +124,11 @@ export default function MealDetails({ match }) {
                 </div>
                 <div className="form-group mb-3">
                   <label htmlFor="ingredients">Ingredients needed</label>
-                  <h5 className="form-control">{meal.ingredients}</h5>
+                  <ul className="form-control">
+                    {meal.ingredients.map((ingredient) => (
+                      <li>{ingredient}</li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="form-group mb-3">
                   <label htmlFor="recipe">Preparation</label>
