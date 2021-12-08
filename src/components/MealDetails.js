@@ -23,8 +23,8 @@ export default function MealDetails({ match }) {
       .then((result) => {
         console.log(result);
         console.log(result.ingredients);
-        if(!Array.isArray(result.ingredients)){
-            result.ingredients = result.ingredients.split("\r");
+        if (!Array.isArray(result.ingredients)) {
+          result.ingredients = result.ingredients.split("\r");
         }
         setMeal(result);
       })
@@ -58,6 +58,24 @@ export default function MealDetails({ match }) {
     historyHook.goBack();
   }
 
+  const ownerButtons = (
+    <div className="col-6">
+      <button
+        type="submit"
+        className="btn btn-primary btn-block text-uppercase"
+        onClick={editButtonHandler}
+      >
+        Edit
+      </button>
+      <button
+        type="submit"
+        className="btn btn-primary btn-block text-uppercase"
+        onClick={deleteButtonHandler}
+      >
+        Delete
+      </button>
+    </div>
+  );
   return meal.name === undefined ? (
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
@@ -137,26 +155,7 @@ export default function MealDetails({ match }) {
 
                 <div className="row">
                   <div className="custom-file mt-3 mb-3">
-                    {meal._ownerId === user._id ? (
-                      <div className="col-6">
-                        <button
-                          type="submit"
-                          className="btn btn-primary btn-block text-uppercase"
-                          onClick={editButtonHandler}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          type="submit"
-                          className="btn btn-primary btn-block text-uppercase"
-                          onClick={deleteButtonHandler}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+                    {meal._ownerId === user._id ? ownerButtons : ""}
                   </div>
                 </div>
               </div>
