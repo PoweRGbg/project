@@ -21,8 +21,6 @@ export default function MealDetails({ match }) {
     }
     fetchData()
       .then((result) => {
-        console.log(result);
-        console.log(result.ingredients);
         if (!Array.isArray(result.ingredients)) {
           result.ingredients = result.ingredients.split("\r");
         }
