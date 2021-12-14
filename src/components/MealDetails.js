@@ -2,17 +2,18 @@ import AuthContext from "../contexts/AuthContext";
 import { useEffect, useState, useContext } from "react";
 import { getMealById, deleteMeal } from "../services/mealService";
 import CommentsCard from "./CommentsCard";
+import ConfirmDialog from "./ConfirmDialog.js";
 import { useHistory } from "react-router-dom";
 import "../css/fontawesome.min.css";
 import "../css/bootstrap.min.css";
 import "../css/templatemo-style.css";
 
 export default function MealDetails({ match }) {
-  let [meal, setMeal] = useState([]);
+  const [meal, setMeal] = useState([]);
   const { user } = useContext(AuthContext);
   let historyHook = useHistory();
-  let [note, setNote] = useState("");
-  let [toDelete, setToDelete] = useState([]);
+  const [note, setNote] = useState("");
+  const [toDelete, setToDelete] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +22,7 @@ export default function MealDetails({ match }) {
     }
     fetchData()
       .then((result) => {
-        if (!Array.isArray(result.ingredients)) {
+        if (!result.message && !Array.isArray(result.ingredients) ) {
           result.ingredients = result.ingredients.split("\r");
         }
         setMeal(result);
@@ -40,20 +41,14 @@ export default function MealDetails({ match }) {
     setNote(`Are you sure you want to remove meal ${meal.name}?`);
   }
 
-  function yesClickHandler(e) {
-    e.preventDefault();
-
-    deleteMeal(meal, user);
-    historyHook.push(`/meals/mymeals`);
-  }
-
-  function noClickHandler(e) {
-    setNote("");
-  }
-
   function goBackHandler(e) {
     e.preventDefault();
     historyHook.goBack();
+  }
+
+  async function deleteHandler() {
+    await deleteMeal(meal, user);
+    historyHook.push(`/meals/mymeals`);
   }
 
   const ownerButtons = (
@@ -75,6 +70,8 @@ export default function MealDetails({ match }) {
     </div>
   );
   return meal.name === undefined ? (
+
+
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
@@ -93,29 +90,9 @@ export default function MealDetails({ match }) {
         </div>
       </div>
     </div>
-  ) : note ? (
-    <div className="container tm-mt-big tm-mb-big">
-      <div className="row">
-        <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-          <div className="tm-bg-primary-dark tm-block tm-block-h-auto">
-            <p style={{ color: "white", "text-align": "center" }}>{note}</p>
-            <button
-              className="btn btn-primary btn-block text-uppercase col-4"
-              onClick={yesClickHandler}
-            >
-              Yes
-            </button>
-            <button
-              className="btn btn-primary btn-block text-uppercase col-4"
-              onClick={noClickHandler}
-            >
-              No
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
   ) : (
+    <>
+    <ConfirmDialog show={note} onClose={() => setNote(false)} onSave={deleteHandler} text={note} />
     <div className="container tm-mt-big tm-mb-big">
       <div className="row">
         <div className="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
@@ -175,5 +152,6 @@ export default function MealDetails({ match }) {
         </div>
       </div>
     </div>
+    </>
   );
 }

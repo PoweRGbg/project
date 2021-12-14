@@ -3,8 +3,6 @@ import AuthContext from "../contexts/AuthContext";
 import { useContext, useState } from "react";
 import SearchBox from "./SearchBox";
 import {Link} from "react-router-dom";
-import AlertDismissable from "./AlertDismissable";
-// import LoginForm from './LoginForm';
 
 export default function Content() {
   const [results, setResults] = useState([]);
