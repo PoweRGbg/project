@@ -7,6 +7,7 @@ export default function SearchBox({searchResult}) {
     let formData = new FormData(e.target);
 
     let searchText = formData.get("search");
+    if(searchText)
     searchMeals(searchText).then(result =>{
         searchResult(result);
     });
