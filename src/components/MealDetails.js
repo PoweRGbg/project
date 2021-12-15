@@ -119,7 +119,7 @@ export default function MealDetails({ match }) {
                   <label htmlFor="ingredients">Ingredients needed</label>
                   <ul className="form-control">
                     {meal.ingredients.map((ingredient) => (
-                      <li>{ingredient}</li>
+                      <li key={ingredient.length+Date.now()}>{ingredient}</li>
                     ))}
                   </ul>
                 </div>

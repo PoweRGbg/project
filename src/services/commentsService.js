@@ -28,12 +28,13 @@ export async function getComments(mealId) {
         let comments = await fetch(commentsUrl , {
             method: 'GET'
         });
+        console.log(`comments is ${JSON.stringify(comments)}`);
         let result = await comments.json();
         let arrayOfResults = Object.values(result).filter(x=> x.recipe === mealId);
         return arrayOfResults;
 
     } catch (error) {
-        console.error(`Failed fetching comments! ${error}`);
+        console.log(`Failed fetching comments! ${error}`);
     }
 }
 
